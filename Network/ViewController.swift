@@ -18,7 +18,7 @@ class ViewController: UIViewController {
 //    operation.failure = { error in print("error : \(error)")}
 //    NetworkQueue.shared.addOperation(operation: operation)
 
-    getConfig(success: { config in
+    getSessions(success: { config in
       print("succes: \(config)")
     }, failure: { error in
       print("error : \(error)")
@@ -28,6 +28,16 @@ class ViewController: UIViewController {
   func getConfig(success: ((Config?) -> Void)? = nil,
                  failure: ((Error) -> Void)? = nil) {
     let operation = GetConfigOperation()
+
+    operation.success = { result in success?(result?.data.first)}
+    operation.failure = failure
+
+    NetworkQueue.shared.addOperation(operation: operation)
+  }
+
+  func getSessions(success: ((Session?) -> Void)? = nil,
+                 failure: ((Error) -> Void)? = nil) {
+    let operation = GetSessionsOperation()
 
     operation.success = { result in success?(result?.data.first)}
     operation.failure = failure
