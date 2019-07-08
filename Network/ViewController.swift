@@ -12,19 +12,19 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-//
-//    let operation = GetQrCodeOperation(qrcode: "MM10000903")
-//    operation.success = { success in print("success : \(success)")}
-//    operation.failure = { error in print("error : \(error)")}
-//    NetworkQueue.shared.addOperation(operation: operation)
 
-    getSessions(success: { config in
-      print("succes: \(config)")
+    getSessionsHistory(success: { history in
+      print("succes: \(history)")
     }, failure: { error in
       print("error : \(error)")
     })
   }
 
+  /// Get app config
+  ///
+  /// - Parameters:
+  ///   - success: success closure with the config
+  ///   - failure: failure closure with error message
   func getConfig(success: ((Config?) -> Void)? = nil,
                  failure: ((Error) -> Void)? = nil) {
     let operation = GetConfigOperation()
@@ -35,9 +35,24 @@ class ViewController: UIViewController {
     NetworkQueue.shared.addOperation(operation: operation)
   }
 
+  /// Get list of authentified user sessions
+  ///
+  /// - Parameters:
+  ///   - success: success closure with the config
+  ///   - failure: failure closure with error message
   func getSessions(success: ((Session?) -> Void)? = nil,
-                 failure: ((Error) -> Void)? = nil) {
+                   failure: ((Error) -> Void)? = nil) {
     let operation = GetSessionsOperation()
+
+    operation.success = { result in success?(result?.data.first)}
+    operation.failure = failure
+
+    NetworkQueue.shared.addOperation(operation: operation)
+  }
+
+  func getSessionsHistory(success: ((SessionHistory?) -> Void)? = nil,
+                          failure: ((Error) -> Void)? = nil) {
+    let operation = GetSessionsHistoryOperation()
 
     operation.success = { result in success?(result?.data.first)}
     operation.failure = failure
