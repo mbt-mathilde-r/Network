@@ -12,7 +12,7 @@ final class GetConfigRequest: RequestProtocol {
   var model: MeloRequestModel<Config>?
 
   var endpoint: String {
-    return "/melomind_dev/config"
+    return "/config"
   }
 
   var method: HTTPMethod {

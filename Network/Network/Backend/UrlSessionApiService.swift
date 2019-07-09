@@ -16,14 +16,14 @@ class UrlSessionApiService: ApiServiceProtocol {
   // MARK: - Properties
   //----------------------------------------------------------------------------
 
-  private let configuration: ApiConfiguration
+  private let configuration: ApiServerConfiguration
   private let service = NetworkServiceProvider()
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization
   //----------------------------------------------------------------------------
 
-  init(configuration: ApiConfiguration = ApiConfiguration.shared) {
+  init(configuration: ApiServerConfiguration = ApiServerConfiguration.shared) {
     self.configuration = configuration
   }
 

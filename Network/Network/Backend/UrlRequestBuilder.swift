@@ -15,7 +15,7 @@ class UrlRequestBuilder {
   //----------------------------------------------------------------------------
 
   static func buildUrlRequest(from request: ApiRequestProtocol,
-                              apiConfiguration: ApiConfiguration,
+                              apiConfiguration: ApiServerConfiguration,
                               timeoutInterval: TimeInterval) -> URLRequest? {
     guard let url =
       UrlRequestBuilder.generateUrl(from: request,
@@ -40,10 +40,12 @@ class UrlRequestBuilder {
     return urlRequest
   }
 
-  private static func generateUrl(from request: ApiRequestProtocol,
-                                  apiConfiguration: ApiConfiguration) -> URL? {
+  private static func generateUrl(
+    from request: ApiRequestProtocol,
+    apiConfiguration: ApiServerConfiguration
+    ) -> URL? {
     var urlComponent = apiConfiguration.baseURL
-    urlComponent.path = request.endpoint
+    urlComponent.path = apiConfiguration.version + request.endpoint
     urlComponent.percentEncodedQuery = request.query
 
     guard let url = urlComponent.url else {
