@@ -9,10 +9,10 @@
 import Foundation
 
 final class GetSessionsHistoryRequest: RequestProtocol {
-  var model: MeloRequestModel<Session>?
+  var model: MeloRequestModel<SessionHistory>?
 
   var endpoint: String {
-    return "/sessions-history"
+    return "/melomind_dev/sessions-history"
   }
 
   var method: HTTPMethod {
@@ -29,8 +29,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   var _parameters: SessionHistoryParameters?
 
   var parameters: [String : Any]? {
-//    return _parameters.
-    return nil
+    return _parameters.dictionary
   }
 
   //----------------------------------------------------------------------------
