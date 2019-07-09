@@ -11,8 +11,8 @@ import Foundation
 struct SessionHistory: Codable {
   let id: String
   let schemaName: String
-  let sessionId: String
-  let sessionIndex: Int // WTF ?
+  let sessionId: String // Index of the session in BDD
+  let sessionIndex: Int // Index of the session for the user
   let startedAt: TimeInterval
   let duration: Int
   let relaxIndexByThresholds: [Float]
