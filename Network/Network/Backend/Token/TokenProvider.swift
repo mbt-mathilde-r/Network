@@ -31,3 +31,12 @@ final class TokenProvider {
   }
 
 }
+
+
+// References:
+// https://symfonycasts.com/screencast/rest-ep2/authentication-via-token
+// https://swagger.io/docs/specification/authentication/bearer-authentication/
+// https://www.thefuturetrends.com/http-get-request-using-auth-header-token-in-swift3/
+//let token = ""
+//urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
