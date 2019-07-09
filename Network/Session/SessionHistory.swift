@@ -19,3 +19,11 @@ struct SessionHistory: Codable {
   let phase: Int
   let level: Int
 }
+
+struct SessionHistoryParameters: Codable {
+  var phase: Int?
+  var level: Int?
+  var _limit: Int?
+  var _skip: Int?
+  var _sort_order: Int?
+}

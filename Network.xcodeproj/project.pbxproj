@@ -44,10 +44,6 @@
 		A90F49DA22D38FA500B124B6 /* MeloRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */; };
 		A90F49DC22D3939E00B124B6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49DB22D3939E00B124B6 /* Config.swift */; };
 		A90F49E022D3960800B124B6 /* GetConfigOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49DF22D3960800B124B6 /* GetConfigOperation.swift */; };
-		A90F49E622D3A39C00B124B6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49E522D3A39C00B124B6 /* Session.swift */; };
-		A90F49E822D3A5D100B124B6 /* GetSessionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49E722D3A5D000B124B6 /* GetSessionsOperation.swift */; };
-		A90F49EA22D3A95300B124B6 /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49E922D3A95300B124B6 /* SessionHistory.swift */; };
-		A90F49EC22D3A9B700B124B6 /* GetSessionsHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49EB22D3A9B700B124B6 /* GetSessionsHistory.swift */; };
 		A921C84122D499ED00455A84 /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A921C83D22D499ED00455A84 /* SessionHistory.swift */; };
 		A921C84222D499ED00455A84 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A921C83E22D499ED00455A84 /* Session.swift */; };
 		A921C84322D499ED00455A84 /* GetSessionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A921C83F22D499ED00455A84 /* GetSessionsOperation.swift */; };
@@ -106,10 +102,6 @@
 		A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeloRequestModel.swift; sourceTree = "<group>"; };
 		A90F49DB22D3939E00B124B6 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A90F49DF22D3960800B124B6 /* GetConfigOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetConfigOperation.swift; sourceTree = "<group>"; };
-		A90F49E522D3A39C00B124B6 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		A90F49E722D3A5D000B124B6 /* GetSessionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSessionsOperation.swift; sourceTree = "<group>"; };
-		A90F49E922D3A95300B124B6 /* SessionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
-		A90F49EB22D3A9B700B124B6 /* GetSessionsHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSessionsHistory.swift; sourceTree = "<group>"; };
 		A921C83D22D499ED00455A84 /* SessionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
 		A921C83E22D499ED00455A84 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A921C83F22D499ED00455A84 /* GetSessionsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSessionsOperation.swift; sourceTree = "<group>"; };
@@ -322,10 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				A921C83C22D499ED00455A84 /* Session */,
-				A90F49E522D3A39C00B124B6 /* Session.swift */,
-				A90F49E922D3A95300B124B6 /* SessionHistory.swift */,
-				A90F49E722D3A5D000B124B6 /* GetSessionsOperation.swift */,
-				A90F49EB22D3A9B700B124B6 /* GetSessionsHistory.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -445,17 +433,14 @@
 				A90F49DC22D3939E00B124B6 /* Config.swift in Sources */,
 				248668B122C4994600425512 /* QueryBuilder.swift in Sources */,
 				24D8B2BA22C3DFC800AC462B /* RequestProtocol.swift in Sources */,
-				A90F49EC22D3A9B700B124B6 /* GetSessionsHistory.swift in Sources */,
 				24D8B2AD22C3A2B200AC462B /* ApiRequestProtocol.swift in Sources */,
 				249B77FF22C410D9007A0882 /* BackendAuthentification.swift in Sources */,
 				24C239D022CA2470002FF6CA /* PostModel.swift in Sources */,
 				A90F49E022D3960800B124B6 /* GetConfigOperation.swift in Sources */,
 				24D8B2B522C3B61100AC462B /* UrlSessionApiService.swift in Sources */,
 				24D8B2AB22C3900100AC462B /* ApiConfiguration.swift in Sources */,
-				A90F49EA22D3A95300B124B6 /* SessionHistory.swift in Sources */,
 				249B780422C41359007A0882 /* NetworkOperation.swift in Sources */,
 				248668AF22C4962C00425512 /* HTTPMethod.swift in Sources */,
-				A90F49E822D3A5D100B124B6 /* GetSessionsOperation.swift in Sources */,
 				4D54E56E22D35D64007B7C18 /* HeaderField.swift in Sources */,
 				248668B322C49E4400425512 /* ApiServiceProtocol.swift in Sources */,
 				248668AD22C495B400425512 /* QueryType.swift in Sources */,
@@ -466,7 +451,6 @@
 				A921C84222D499ED00455A84 /* Session.swift in Sources */,
 				A921C84322D499ED00455A84 /* GetSessionsOperation.swift in Sources */,
 				24C239D822CA461D002FF6CA /* PostPostOperation.swift in Sources */,
-				A90F49E622D3A39C00B124B6 /* Session.swift in Sources */,
 				24A4147122C23A2800CDEB4B /* ViewController.swift in Sources */,
 				A921C84122D499ED00455A84 /* SessionHistory.swift in Sources */,
 				249B780A22C41B8F007A0882 /* EncodableExtension.swift in Sources */,
