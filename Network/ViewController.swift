@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
 
     getSessionsHistory(success: { history in
-      print("succes: \(history)")
+      print("succes: \(String(describing: history))")
     }, failure: { error in
       print("error : \(error)")
     })
