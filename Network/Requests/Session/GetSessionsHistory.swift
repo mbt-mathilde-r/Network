@@ -42,7 +42,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
 }
 
 final class GetSessionsHistoryOperation: NetworkOperation<
-MeloRequestModel<SessionHistory>,
+SessionHistory,
 GetSessionsHistoryRequest
 > {
   init(dependecies: [Operation]? = nil) {

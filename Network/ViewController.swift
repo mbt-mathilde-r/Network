@@ -43,13 +43,11 @@ class ViewController: UIViewController {
   // MARK: - Api calls
   //----------------------------------------------------------------------------
 
+
   typealias SessionHistoryResult = Result<[SessionHistory], Error>
   func getSessionsHistory(completion: ((SessionHistoryResult) -> Void)?) {
     let operation = GetSessionsHistoryOperation()
-
-    operation.success = { result in completion?(.success(result.data))}
-    operation.failure = { error in completion?(.failure(error)) }
-
+    operation.completionBlock = { completion?(operation.result) }
     NetworkQueue.shared.addOperation(operation: operation)
   }
 
@@ -72,7 +70,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     return cell!
   }
-
 
 }
 

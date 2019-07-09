@@ -11,6 +11,7 @@ enum NetworkError : Error {
   case InvalidHTTPURLResponse(response: HTTPURLResponse)
   case couldNotGenerateURL
   case invalidResult
+  case invalidEnvelopeData
 
   //----------------------------------------------------------------------------
   // MARK: - Validity

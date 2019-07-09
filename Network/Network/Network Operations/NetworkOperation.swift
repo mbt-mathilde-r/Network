@@ -71,7 +71,12 @@ class NetworkOperation<
 
   private func handleSuccess(data: Data) {
     do {
-      let item = try JSONDecoder().decode(ModelType.self, from: data)
+      let envelope = try JSONDecoder().decode(MeloRequestModel<ModelType>.self,
+                                              from: data)
+      guard let item = envelope.data.first else {
+        handleFailure(error: NetworkError.invalidEnvelopeData)
+        return
+      }
       result = ResultType.success(item)
     } catch {
       handleFailure(error: error)
