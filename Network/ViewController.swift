@@ -10,54 +10,69 @@ import UIKit
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var tableView: UITableView!
+
+  var sessions = [SessionHistory]()
+
+  //----------------------------------------------------------------------------
+  // MARK: - View life cycle
+  //----------------------------------------------------------------------------
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    getSessionsHistory(success: { history in
-      print("succes: \(String(describing: history))")
-    }, failure: { error in
-      print("error : \(error)")
-    })
+    tableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil),
+                       forCellReuseIdentifier: "session")
+
+    getSessionsHistory() { result in
+      // 1) with switch
+      switch result {
+      case .success(let session):
+        self.sessions = session
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+        }
+      case .failure(let error): print("error : \(error)")
+      }
+    }
+
   }
 
-  /// Get app config
-  ///
-  /// - Parameters:
-  ///   - success: success closure with the config
-  ///   - failure: failure closure with error message
-  func getConfig(success: ((Config?) -> Void)? = nil,
-                 failure: ((Error) -> Void)? = nil) {
-    let operation = GetConfigOperation()
 
-    operation.success = { result in success?(result?.data.first)}
-    operation.failure = failure
+  //----------------------------------------------------------------------------
+  // MARK: - Api calls
+  //----------------------------------------------------------------------------
 
-    NetworkQueue.shared.addOperation(operation: operation)
-  }
-
-  /// Get list of authentified user sessions
-  ///
-  /// - Parameters:
-  ///   - success: success closure with the config
-  ///   - failure: failure closure with error message
-  func getSessions(success: ((Session?) -> Void)? = nil,
-                   failure: ((Error) -> Void)? = nil) {
-    let operation = GetSessionsOperation()
-
-    operation.success = { result in success?(result?.data.first)}
-    operation.failure = failure
-
-    NetworkQueue.shared.addOperation(operation: operation)
-  }
-
-  func getSessionsHistory(success: ((SessionHistory?) -> Void)? = nil,
-                          failure: ((Error) -> Void)? = nil) {
+  typealias SessionHistoryResult = Result<[SessionHistory], Error>
+  func getSessionsHistory(completion: ((SessionHistoryResult) -> Void)?) {
     let operation = GetSessionsHistoryOperation()
 
-    operation.success = { result in success?(result?.data.first)}
-    operation.failure = failure
+    operation.success = { result in completion?(.success(result.data))}
+    operation.failure = { error in completion?(.failure(error)) }
 
     NetworkQueue.shared.addOperation(operation: operation)
   }
+
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return sessions.count
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "session")
+    let session = sessions[indexPath.row]
+
+    if let cell = cell as? SessionTableViewCell {
+      cell.date = Date(timeIntervalSince1970: session.startedAt).description
+      cell.index = session.sessionId
+      cell.duration = session.duration / 60
+    }
+
+    return cell!
+  }
+
+
 }
 

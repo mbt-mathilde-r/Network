@@ -26,7 +26,10 @@ final class GetConfigRequest: RequestProtocol {
   var parameters: [String : Any]? { return nil }
 }
 
-final class GetConfigOperation: NetworkOperation<MeloRequestModel<Config>?, GetConfigRequest> {
+final class GetConfigOperation: NetworkOperation<
+MeloRequestModel<Config>,
+GetConfigRequest
+> {
   init(dependecies: [Operation]? = nil) {
     let request = GetConfigRequest()
     super.init(request: request, dependencies: dependecies)
