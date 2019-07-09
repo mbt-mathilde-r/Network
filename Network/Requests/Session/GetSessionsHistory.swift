@@ -29,8 +29,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   var _parameters: SessionHistoryParameters?
 
   var parameters: [String : Any]? {
-//    return _parameters.
-    return nil
+    return _parameters.dictionary
   }
 
   //----------------------------------------------------------------------------

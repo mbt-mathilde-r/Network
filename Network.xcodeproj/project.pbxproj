@@ -48,6 +48,8 @@
 		A90F49DA22D38FA500B124B6 /* MeloRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */; };
 		A90F49DC22D3939E00B124B6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49DB22D3939E00B124B6 /* Config.swift */; };
 		A90F49E022D3960800B124B6 /* GetConfigOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49DF22D3960800B124B6 /* GetConfigOperation.swift */; };
+		A921C84922D4A04400455A84 /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A921C84722D4A04400455A84 /* SessionTableViewCell.swift */; };
+		A921C84A22D4A04400455A84 /* SessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A921C84822D4A04400455A84 /* SessionTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,8 @@
 		A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeloRequestModel.swift; sourceTree = "<group>"; };
 		A90F49DB22D3939E00B124B6 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A90F49DF22D3960800B124B6 /* GetConfigOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetConfigOperation.swift; sourceTree = "<group>"; };
+		A921C84722D4A04400455A84 /* SessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
+		A921C84822D4A04400455A84 /* SessionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,9 +232,8 @@
 		24A4146D22C23A2800CDEB4B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A90F49E422D3A38B00B124B6 /* Session */,
-				A90F49DE22D395F200B124B6 /* Config */,
-				A90F49DD22D395E600B124B6 /* QrCode */,
+				A921C84622D4A02800455A84 /* Views */,
+				A921C84522D4A01B00455A84 /* Requests */,
 				A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */,
 				24A4147A22C23A2900CDEB4B /* Info.plist */,
 				24A4147022C23A2800CDEB4B /* ViewController.swift */,
@@ -313,7 +316,6 @@
 		A90F49E422D3A38B00B124B6 /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				A921C83C22D499ED00455A84 /* Session */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -326,7 +328,27 @@
 				4D4EBBE722D49B9600199055 /* Session.swift */,
 				4D4EBBE522D49B9600199055 /* SessionHistory.swift */,
 			);
-			name = Session;
+			path = Session;
+			sourceTree = "<group>";
+		};
+		A921C84522D4A01B00455A84 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				A90F49E422D3A38B00B124B6 /* Session */,
+				A921C83C22D499ED00455A84 /* Session */,
+				A90F49DE22D395F200B124B6 /* Config */,
+				A90F49DD22D395E600B124B6 /* QrCode */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		A921C84622D4A02800455A84 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A921C84722D4A04400455A84 /* SessionTableViewCell.swift */,
+				A921C84822D4A04400455A84 /* SessionTableViewCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -410,6 +432,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A921C84A22D4A04400455A84 /* SessionTableViewCell.xib in Resources */,
 				4D853B5722CCD06200FE7CE8 /* Main.storyboard in Resources */,
 				24A4147622C23A2900CDEB4B /* Assets.xcassets in Resources */,
 				4D853B5522CCD05900FE7CE8 /* LaunchScreen.storyboard in Resources */,
@@ -460,6 +483,7 @@
 				24C239D222CA24C4002FF6CA /* GetPostRequest.swift in Sources */,
 				4D4EBBEB22D49B9600199055 /* Session.swift in Sources */,
 				4D853B5222CCAE7300FE7CE8 /* TokenType.swift in Sources */,
+				A921C84922D4A04400455A84 /* SessionTableViewCell.swift in Sources */,
 				4D853B5022CCAC7F00FE7CE8 /* TokenProvider.swift in Sources */,
 				249B780F22C42197007A0882 /* NetworkQueue.swift in Sources */,
 				4D54E56C22D324B2007B7C18 /* AsynchronousBlockOperation.swift in Sources */,
