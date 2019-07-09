@@ -26,7 +26,7 @@ final class GetSessionsRequest: RequestProtocol {
   var parameters: [String : Any]? { return nil }
 }
 
-final class GetSessionsOperation: NetworkOperation<Session, GetSessionsRequest>{
+final class GetSessionsOperation: NetworkOperation<[Session], Session, GetSessionsRequest>{
   init(dependecies: [Operation]? = nil) {
     let request = GetSessionsRequest()
     super.init(request: request, dependencies: dependecies)

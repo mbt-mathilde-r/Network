@@ -42,8 +42,9 @@ final class GetSessionsHistoryRequest: RequestProtocol {
 }
 
 final class GetSessionsHistoryOperation: NetworkOperation<
-SessionHistory,
-GetSessionsHistoryRequest
+  [SessionHistory],
+  SessionHistory,
+  GetSessionsHistoryRequest
 > {
   init(dependecies: [Operation]? = nil) {
     let request = GetSessionsHistoryRequest()

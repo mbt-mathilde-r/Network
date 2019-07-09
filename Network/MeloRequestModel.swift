@@ -16,7 +16,7 @@ struct MeloHeader: Codable {
   let total: Int
 }
 
-struct MeloRequestModel<Model: Codable>: Codable {
+struct MeloRequestModel<DataItemType: Codable>: Codable {
   let header: MeloHeader
-  let data: [Model]
+  let data: [DataItemType]
 }

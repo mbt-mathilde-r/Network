@@ -1,8 +1,9 @@
 import Foundation
 
 class NetworkOperation<
-  ModelType: Codable,
-  RequestType: ApiRequestProtocol
+    ResultSuccessType,
+    DataItemType: Codable,
+    RequestType: ApiRequestProtocol
 >: AsynchronousBlockOperation {
 
   //----------------------------------------------------------------------------
@@ -11,7 +12,7 @@ class NetworkOperation<
 
   /******************** Typealias ********************/
 
-  typealias ResultType = Result<ModelType, Error>
+  typealias ResultType = Result<ResultSuccessType, Error>
 
   /******************** Services ********************/
 
@@ -21,7 +22,7 @@ class NetworkOperation<
 
   /******************** Result ********************/
 
-  var success: ((ModelType) -> Void)?
+  var success: ((ResultSuccessType) -> Void)?
 
   var failure: ((Error) -> Void)?
 
@@ -34,6 +35,10 @@ class NetworkOperation<
       case .failure(let error): failure?(error)
       }
     }
+  }
+
+  var isResultSuccessTypeArray: Bool {
+    return ResultSuccessType.self is Array<DataItemType>.Type
   }
 
   //----------------------------------------------------------------------------
@@ -71,13 +76,24 @@ class NetworkOperation<
 
   private func handleSuccess(data: Data) {
     do {
-      let envelope = try JSONDecoder().decode(MeloRequestModel<ModelType>.self,
-                                              from: data)
-      guard let item = envelope.data.first else {
-        handleFailure(error: NetworkError.invalidEnvelopeData)
-        return
+      let envelope =
+        try JSONDecoder().decode(MeloRequestModel<DataItemType>.self,
+                                 from: data)
+
+      if isResultSuccessTypeArray {
+        guard let item = envelope.data as? ResultSuccessType else {
+          handleFailure(error: NetworkError.invalidEnvelopeData)
+          return
+        }
+        result = ResultType.success(item)
+      } else {
+        guard let item = envelope.data.first as? ResultSuccessType else {
+          handleFailure(error: NetworkError.invalidEnvelopeData)
+          return
+        }
+        result = ResultType.success(item)
       }
-      result = ResultType.success(item)
+      
     } catch {
       handleFailure(error: error)
     }
@@ -100,5 +116,11 @@ class NetworkOperation<
     super.cancel()
     service.cancel()
   }
+
+  //----------------------------------------------------------------------------
+  // MARK: - Shitty Utility
+  //----------------------------------------------------------------------------
+
+
 
 }

@@ -24,15 +24,36 @@ class ViewController: UIViewController {
     tableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil),
                        forCellReuseIdentifier: "session")
 
-    getSessionsHistory() { result in
-      // 1) with switch
+//    getSessionsHistory() { result in
+//      // 1) with switch
+//      switch result {
+//      case .success(let session):
+//        self.sessions = session
+//        DispatchQueue.main.async {
+//          self.tableView.reloadData()
+//        }
+//      case .failure(let error): print("error : \(error)")
+//      }
+//    }
+
+    getConfig() { result in
       switch result {
-      case .success(let session):
-        self.sessions = session
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-        }
-      case .failure(let error): print("error : \(error)")
+      case .failure(let error): print(error.localizedDescription)
+      case .success(let data): print(data)
+      }
+    }
+
+    getSessions() { result in
+      switch result {
+      case .failure(let error): print(error)
+      case .success(let data): print(data)
+      }
+    }
+
+    getSessionsHistory()  { result in
+      switch result {
+      case .failure(let error): print(error.localizedDescription)
+      case .success(let data): print(data)
       }
     }
 
@@ -43,6 +64,28 @@ class ViewController: UIViewController {
   // MARK: - Api calls
   //----------------------------------------------------------------------------
 
+
+  /// Get app config
+  ///
+  /// - Parameters:
+  ///   - success: success closure with the config
+  ///   - failure: failure closure with error message
+  func getConfig(completion: ((Result<Config, Error>) -> Void)?) {
+    let operation = GetConfigOperation()
+    operation.completionBlock = { completion?(operation.result) }
+    NetworkQueue.shared.addOperation(operation: operation)
+  }
+
+  /// Get list of authentified user sessions
+  ///
+  /// - Parameters:
+  ///   - success: success closure with the config
+  ///   - failure: failure closure with error message
+  func getSessions(completion: ((Result<[Session], Error>) -> Void)?) {
+    let operation = GetSessionsOperation()
+    operation.completionBlock = { completion?(operation.result) }
+    NetworkQueue.shared.addOperation(operation: operation)
+  }
 
   typealias SessionHistoryResult = Result<[SessionHistory], Error>
   func getSessionsHistory(completion: ((SessionHistoryResult) -> Void)?) {

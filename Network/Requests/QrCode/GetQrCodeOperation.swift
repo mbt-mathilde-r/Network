@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class GetQrCodeOperation: NetworkOperation<MeloRequestModel<QrCode>, GetQrCodeRequest> {
+final class GetQrCodeOperation: NetworkOperation<QrCode, QrCode, GetQrCodeRequest> {
   init(qrcode: String, dependencies: [Operation]? = nil) {
     let request = GetQrCodeRequest(qrcode: qrcode)
     super.init(request: request, dependencies: dependencies)
