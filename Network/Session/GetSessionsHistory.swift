@@ -42,7 +42,10 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   }
 }
 
-final class GetSessionsHistoryOperation: NetworkOperation<MeloRequestModel<SessionHistory>?, GetSessionsHistoryRequest> {
+final class GetSessionsHistoryOperation: NetworkOperation<
+MeloRequestModel<SessionHistory>,
+GetSessionsHistoryRequest
+> {
   init(dependecies: [Operation]? = nil) {
     let request = GetSessionsHistoryRequest()
     super.init(request: request, dependencies: dependecies)
