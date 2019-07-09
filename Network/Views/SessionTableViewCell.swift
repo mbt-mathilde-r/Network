@@ -36,40 +36,6 @@ class SessionTableViewCell: UITableViewCell {
       guard let text = durationLabel.text else { return nil }
       return Int(text)
     }
-    set { durationLabel.text = "\(String(describing: newValue))" }
+    set { durationLabel.text = "\(newValue ?? 0)" }
   }
-
-  //----------------------------------------------------------------------------
-  // MARK: - Initialization
-  //----------------------------------------------------------------------------
-
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-//    setup()
-  }
-
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-
-  private func setup() {
-    loadNib()
-
-    setupView()
-
-    contentView.frame = bounds
-    addSubview(contentView)
-  }
-
-  private func loadNib() {
-    let bundle = Bundle(for: type(of: self))
-    let nibName = String(describing: SessionTableViewCell.self)
-    bundle.loadNibNamed(nibName, owner: self, options: nil)
-  }
-
-  private func setupView() {
-
-  }
-
 }

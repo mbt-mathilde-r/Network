@@ -12,7 +12,20 @@ class ViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
 
-  var sessions = [SessionHistory]()
+  var sessions = [SessionHistory]() {
+    didSet {
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+      }
+    }
+  }
+
+  let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    return dateFormatter
+  }()
 
   //----------------------------------------------------------------------------
   // MARK: - View life cycle
@@ -25,17 +38,11 @@ class ViewController: UIViewController {
                        forCellReuseIdentifier: "session")
 
     getSessionsHistory() { result in
-      // 1) with switch
       switch result {
-      case .success(let session):
-        self.sessions = session
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-        }
+      case .success(let session): self.sessions = [session]
       case .failure(let error): print("error : \(error)")
       }
     }
-
   }
 
 
@@ -44,14 +51,19 @@ class ViewController: UIViewController {
   //----------------------------------------------------------------------------
 
 
-  typealias SessionHistoryResult = Result<[SessionHistory], Error>
-  func getSessionsHistory(completion: ((SessionHistoryResult) -> Void)?) {
-    let operation = GetSessionsHistoryOperation()
+  typealias SessionHistoryResult = Result<SessionHistory, Error>
+  func getSessionsHistory(parameters: SessionHistoryParameters? = nil,
+                          completion: ((SessionHistoryResult) -> Void)?) {
+    let parameters = SessionHistoryParameters(phase: 0, level: 0, _limit: 10, _skip: 0, _sort_order: 1)
+    let operation = GetSessionsHistoryOperation(parameters: parameters)
     operation.completionBlock = { completion?(operation.result) }
     NetworkQueue.shared.addOperation(operation: operation)
   }
-
 }
+
+//----------------------------------------------------------------------------
+// MARK: - Table View control
+//----------------------------------------------------------------------------
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +75,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     let session = sessions[indexPath.row]
 
     if let cell = cell as? SessionTableViewCell {
-      cell.date = Date(timeIntervalSince1970: session.startedAt).description
+      cell.date = dateFormatter.string(from: Date(timeIntervalSince1970: session.startedAt))
       cell.index = session.sessionId
       cell.duration = session.duration / 60
     }

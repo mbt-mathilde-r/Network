@@ -12,7 +12,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   var model: MeloRequestModel<SessionHistory>?
 
   var endpoint: String {
-    return "/melomind_dev/sessions-history"
+    return "/sessions-history"
   }
 
   var method: HTTPMethod {
@@ -20,7 +20,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   }
 
   var headers: [String: String]? {
-    return ["Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOjkwLCJpYXQiOjE1NjI1OTkzODEsImV4cCI6MTU2MjY4NTc4MSwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiY2U2Mjc2NGMtNjQ0Zi00MjRmLWJjNzQtZGM3ODg5ZjhiYzVkIn0.7aDILvFJA7xm1IJlwpkx087QuLGH3W1nwjmcFOX3mLw"]
+    return ["Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOjkwLCJpYXQiOjE1NjI2ODY0MTAsImV4cCI6MTU2Mjc3MjgxMCwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiMzc3YzJiZDUtZGQ1YS00MmJjLTkxMjAtNjQ5ZDdlZGMxMDE3In0.5717Uvrdx_0Az7wmIRWxFdTTX7YHkBWtZoOyDWTveRc"]
   }
 
   //----------------------------------------------------------------------------
@@ -41,12 +41,15 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   }
 }
 
-final class GetSessionsHistoryOperation: NetworkOperation<
-SessionHistory,
-GetSessionsHistoryRequest
-> {
-  init(dependecies: [Operation]? = nil) {
-    let request = GetSessionsHistoryRequest()
+typealias SessionHistoryNetworkOperation = NetworkOperation<
+  SessionHistory,
+  GetSessionsHistoryRequest
+>
+
+final class GetSessionsHistoryOperation: SessionHistoryNetworkOperation {
+  init(parameters: SessionHistoryParameters? = nil,
+       dependecies: [Operation]? = nil) {
+    let request = GetSessionsHistoryRequest(parameters: parameters)
     super.init(request: request, dependencies: dependecies)
   }
 }
