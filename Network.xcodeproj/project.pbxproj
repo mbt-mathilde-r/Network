@@ -313,13 +313,6 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		A90F49E422D3A38B00B124B6 /* Session */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Session;
-			sourceTree = "<group>";
-		};
 		A921C83C22D499ED00455A84 /* Session */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,7 +327,6 @@
 		A921C84522D4A01B00455A84 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				A90F49E422D3A38B00B124B6 /* Session */,
 				A921C83C22D499ED00455A84 /* Session */,
 				A90F49DE22D395F200B124B6 /* Config */,
 				A90F49DD22D395E600B124B6 /* QrCode */,
