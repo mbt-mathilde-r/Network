@@ -35,6 +35,7 @@
 		4D4EBBE922D49B9600199055 /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE522D49B9600199055 /* SessionHistory.swift */; };
 		4D4EBBEA22D49B9600199055 /* GetSessionsHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE622D49B9600199055 /* GetSessionsHistory.swift */; };
 		4D4EBBEB22D49B9600199055 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE722D49B9600199055 /* Session.swift */; };
+		4D4EBBEE22D4CDC600199055 /* ApiServerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */; };
 		4D54E56C22D324B2007B7C18 /* AsynchronousBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54E56B22D324B2007B7C18 /* AsynchronousBlockOperation.swift */; };
 		4D54E56E22D35D64007B7C18 /* HeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54E56D22D35D64007B7C18 /* HeaderField.swift */; };
 		4D853B4E22CCAC0300FE7CE8 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D853B4D22CCAC0300FE7CE8 /* UrlRequestBuilder.swift */; };
@@ -93,6 +94,7 @@
 		4D4EBBE522D49B9600199055 /* SessionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
 		4D4EBBE622D49B9600199055 /* GetSessionsHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSessionsHistory.swift; sourceTree = "<group>"; };
 		4D4EBBE722D49B9600199055 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServerConfigurationTests.swift; sourceTree = "<group>"; };
 		4D54E56B22D324B2007B7C18 /* AsynchronousBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousBlockOperation.swift; sourceTree = "<group>"; };
 		4D54E56D22D35D64007B7C18 /* HeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderField.swift; sourceTree = "<group>"; };
 		4D853B4D22CCAC0300FE7CE8 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilder.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		24A4148222C23A2900CDEB4B /* NetworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				4D4EBBEC22D4CD9800199055 /* Backend */,
 				24A4148322C23A2900CDEB4B /* NetworkTests.swift */,
 				24A4148522C23A2900CDEB4B /* Info.plist */,
 			);
@@ -279,6 +282,14 @@
 				24C239CF22CA2470002FF6CA /* PostModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4D4EBBEC22D4CD9800199055 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */,
+			);
+			path = Backend;
 			sourceTree = "<group>";
 		};
 		4D853B5322CCAE8500FE7CE8 /* Token */ = {
@@ -474,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D4EBBEE22D4CDC600199055 /* ApiServerConfigurationTests.swift in Sources */,
 				24A4148422C23A2900CDEB4B /* NetworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
