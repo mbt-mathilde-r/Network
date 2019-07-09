@@ -12,7 +12,7 @@ final class GetSessionsRequest: RequestProtocol {
   var model: MeloRequestModel<Session>?
 
   var endpoint: String {
-    return "/melomind_dev/sessions"
+    return "/sessions"
   }
 
   var method: HTTPMethod {

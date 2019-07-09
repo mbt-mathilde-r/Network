@@ -2,7 +2,7 @@ import Foundation
 
 // https://jsonplaceholder.typicode.com
 
-final class ApiConfiguration {
+final class ApiServerConfiguration {
 
   //----------------------------------------------------------------------------
   // MARK: - Properties
@@ -10,12 +10,20 @@ final class ApiConfiguration {
 
   /******************** Singleton ********************/
 
-  static var shared = ApiConfiguration()
+  static var shared = ApiServerConfiguration()
 
   /******************** URL ********************/
 
   private var host: String {
     return "api.devz.mybraintech.com"
+  }
+
+  var version: String {
+    #if DEBUG
+    return "/melomind_dev"
+    #elseif RELEASE
+    return "/melomind_dev"
+    #endif
   }
 
   var baseURL: URLComponents {

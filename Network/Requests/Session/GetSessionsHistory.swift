@@ -9,7 +9,7 @@
 import Foundation
 
 final class GetSessionsHistoryRequest: RequestProtocol {
-  var model: MeloRequestModel<SessionHistory>?
+  var model: MeloRequestModel<[SessionHistory]>?
 
   var endpoint: String {
     return "/melomind_dev/sessions-history"
@@ -42,7 +42,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
 }
 
 final class GetSessionsHistoryOperation: NetworkOperation<
-SessionHistory,
+[SessionHistory],
 GetSessionsHistoryRequest
 > {
   init(dependecies: [Operation]? = nil) {
