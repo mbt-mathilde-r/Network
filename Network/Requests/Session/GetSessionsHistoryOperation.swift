@@ -20,7 +20,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   }
 
   var headers: [String: String]? {
-    return ["Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOjkwLCJpYXQiOjE1NjI2ODY0MTAsImV4cCI6MTU2Mjc3MjgxMCwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiMzc3YzJiZDUtZGQ1YS00MmJjLTkxMjAtNjQ5ZDdlZGMxMDE3In0.5717Uvrdx_0Az7wmIRWxFdTTX7YHkBWtZoOyDWTveRc"]
+    return ["Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOjE5NSwiaWF0IjoxNTYyNzUwMjM4LCJleHAiOjE1NjI4MzY2MzgsImF1ZCI6Imh0dHBzOi8veW91cmRvbWFpbi5jb20iLCJpc3MiOiJmZWF0aGVycyIsInN1YiI6ImFub255bW91cyIsImp0aSI6ImMzMWEzMjMzLTBhN2UtNGVlZi1hYTBjLTY4YzhkOTE0Y2U0OSJ9.GZfnKuwcHnEsnO65U2ZbRgQsWv9inLAEycdM8BHNvtQ"]
   }
 
   //----------------------------------------------------------------------------
