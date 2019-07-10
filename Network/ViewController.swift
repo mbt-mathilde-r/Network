@@ -44,22 +44,25 @@ class ViewController: UIViewController {
                                               _sort_order: nil)
     getSessionsHistory(parameters: parameters) { result in
       switch result {
-      case .success(let session): self.sessions = [session]
+      case .success(let sessions):
+        print("----------------------------------------- History \(sessions)")
+        self.sessions = sessions
       case .failure(let error): print("error : \(error)")
       }
     }
 
-    getConfig() { result in
-      switch result {
-      case .failure(let error): print(error.localizedDescription)
-      case .success(let data): print(data)
-      }
-    }
-
+//    getConfig() { result in
+//      switch result {
+//      case .failure(let error): print(error.localizedDescription)
+//      case .success(let data): print(data)
+//      }
+//    }
+//
     getSessions() { result in
       switch result {
       case .failure(let error): print(error)
-      case .success(let data): print(data)
+      case .success(let data):
+        print("----------------------------------------- Session \(data)")
       }
     }
   }
@@ -69,7 +72,7 @@ class ViewController: UIViewController {
   // MARK: - Api calls
   //----------------------------------------------------------------------------
 
-  typealias SessionHistoryResult = Result<SessionHistory, Error>
+  typealias SessionHistoryResult = Result<[SessionHistory], Error>
   func getSessionsHistory(parameters: SessionHistoryParameters? = nil,
                           completion: ((SessionHistoryResult) -> Void)?) {
     let operation = GetSessionsHistoryOperation(parameters: parameters)
