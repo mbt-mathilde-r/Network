@@ -33,7 +33,7 @@
 		24D8B2BA22C3DFC800AC462B /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D8B2B922C3DFC800AC462B /* RequestProtocol.swift */; };
 		4D4EBBE822D49B9600199055 /* GetSessionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE422D49B9600199055 /* GetSessionsOperation.swift */; };
 		4D4EBBE922D49B9600199055 /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE522D49B9600199055 /* SessionHistory.swift */; };
-		4D4EBBEA22D49B9600199055 /* GetSessionsHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE622D49B9600199055 /* GetSessionsHistory.swift */; };
+		4D4EBBEA22D49B9600199055 /* GetSessionsHistoryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE622D49B9600199055 /* GetSessionsHistoryOperation.swift */; };
 		4D4EBBEB22D49B9600199055 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE722D49B9600199055 /* Session.swift */; };
 		4D4EBBEE22D4CDC600199055 /* ApiServerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */; };
 		4D54E56C22D324B2007B7C18 /* AsynchronousBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54E56B22D324B2007B7C18 /* AsynchronousBlockOperation.swift */; };
@@ -94,7 +94,7 @@
 		24D8B2B922C3DFC800AC462B /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		4D4EBBE422D49B9600199055 /* GetSessionsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSessionsOperation.swift; sourceTree = "<group>"; };
 		4D4EBBE522D49B9600199055 /* SessionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
-		4D4EBBE622D49B9600199055 /* GetSessionsHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSessionsHistory.swift; sourceTree = "<group>"; };
+		4D4EBBE622D49B9600199055 /* GetSessionsHistoryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSessionsHistoryOperation.swift; sourceTree = "<group>"; };
 		4D4EBBE722D49B9600199055 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServerConfigurationTests.swift; sourceTree = "<group>"; };
 		4D54E56B22D324B2007B7C18 /* AsynchronousBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousBlockOperation.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 		A921C83C22D499ED00455A84 /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				4D4EBBE622D49B9600199055 /* GetSessionsHistory.swift */,
+				4D4EBBE622D49B9600199055 /* GetSessionsHistoryOperation.swift */,
 				4D4EBBE422D49B9600199055 /* GetSessionsOperation.swift */,
 				4D4EBBE722D49B9600199055 /* Session.swift */,
 				4D4EBBE522D49B9600199055 /* SessionHistory.swift */,
@@ -456,7 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D4EBBEA22D49B9600199055 /* GetSessionsHistory.swift in Sources */,
+				4D4EBBEA22D49B9600199055 /* GetSessionsHistoryOperation.swift in Sources */,
 				A90F49DC22D3939E00B124B6 /* Config.swift in Sources */,
 				248668B122C4994600425512 /* QueryBuilder.swift in Sources */,
 				24D8B2BA22C3DFC800AC462B /* RequestProtocol.swift in Sources */,

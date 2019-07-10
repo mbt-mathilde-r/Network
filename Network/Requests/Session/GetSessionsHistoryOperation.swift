@@ -12,7 +12,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   var model: MeloRequestModel<SessionHistory>?
 
   var endpoint: String {
-    return "/melomind_dev/sessions-history"
+    return "/sessions-history"
   }
 
   var method: HTTPMethod {
@@ -41,13 +41,16 @@ final class GetSessionsHistoryRequest: RequestProtocol {
   }
 }
 
-final class GetSessionsHistoryOperation: NetworkOperation<
+typealias SessionHistoryNetworkOperation = NetworkOperation<
   [SessionHistory],
   SessionHistory,
   GetSessionsHistoryRequest
-> {
-  init(dependecies: [Operation]? = nil) {
-    let request = GetSessionsHistoryRequest()
+>
+
+final class GetSessionsHistoryOperation: SessionHistoryNetworkOperation {
+  init(parameters: SessionHistoryParameters? = nil,
+       dependecies: [Operation]? = nil) {
+    let request = GetSessionsHistoryRequest(parameters: parameters)
     super.init(request: request, dependencies: dependecies)
   }
 }

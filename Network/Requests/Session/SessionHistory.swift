@@ -26,4 +26,16 @@ struct SessionHistoryParameters: Codable {
   var _limit: Int?
   var _skip: Int?
   var _sort_order: Int?
+
+  init(phase: Int? = nil,
+       level: Int? = nil,
+       limit: Int? = nil,
+       skip: Int? = nil,
+       sort_order: Int? = nil) {
+    self.phase = phase
+    self.level = level
+    self._limit = limit
+    self._skip = skip
+    self._sort_order = sort_order
+  }
 }

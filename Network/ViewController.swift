@@ -12,7 +12,22 @@ class ViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
 
-  var sessions = [SessionHistory]()
+  var sessions = [Int: [SessionHistory]]() {
+    didSet {
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+      }
+    }
+  }
+
+  var config: Config?
+
+  let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    return dateFormatter
+  }()
 
   //----------------------------------------------------------------------------
   // MARK: - View life cycle
@@ -24,39 +39,15 @@ class ViewController: UIViewController {
     tableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil),
                        forCellReuseIdentifier: "session")
 
-//    getSessionsHistory() { result in
-//      // 1) with switch
-//      switch result {
-//      case .success(let session):
-//        self.sessions = session
-//        DispatchQueue.main.async {
-//          self.tableView.reloadData()
-//        }
-//      case .failure(let error): print("error : \(error)")
-//      }
-//    }
-
     getConfig() { result in
       switch result {
-      case .failure(let error): print(error.localizedDescription)
-      case .success(let data): print(data)
+      case .success(let config):
+        self.config = config
+        self.getSessionsHistoryFromConfig()
+      case .failure(let error):
+        print("Cannot get config \(error)")
       }
     }
-
-    getSessions() { result in
-      switch result {
-      case .failure(let error): print(error)
-      case .success(let data): print(data)
-      }
-    }
-
-    getSessionsHistory()  { result in
-      switch result {
-      case .failure(let error): print(error.localizedDescription)
-      case .success(let data): print(data)
-      }
-    }
-
   }
 
 
@@ -64,6 +55,32 @@ class ViewController: UIViewController {
   // MARK: - Api calls
   //----------------------------------------------------------------------------
 
+  typealias SessionHistoryResult = Result<[SessionHistory], Error>
+
+  private func getSessionsHistoryFromConfig() {
+    guard let config = config else { return }
+
+    self.getSessionsHistory(for: config.phases)  { result in
+      switch result {
+      case .success(let sessions):
+        if let first = sessions.first { self.sessions[first.phase] = sessions }
+      case .failure(let error): print("error : \(error)")
+      }
+    }
+
+  }
+
+  func getSessionsHistory(for phases: [ConfigPhase],
+                          dependencies: [Operation]? = nil,
+                          completion: ((SessionHistoryResult) -> Void)?) {
+    let operations = phases.map { phase -> Operation in
+      let parameters = SessionHistoryParameters(phase: phase.index)
+      let operation = GetSessionsHistoryOperation(parameters: parameters)
+      operation.completionBlock = { completion?(operation.result) }
+      return operation
+    }
+    NetworkQueue.shared.addOperations(operations: operations)
+  }
 
   /// Get app config
   ///
@@ -86,27 +103,31 @@ class ViewController: UIViewController {
     operation.completionBlock = { completion?(operation.result) }
     NetworkQueue.shared.addOperation(operation: operation)
   }
-
-  typealias SessionHistoryResult = Result<[SessionHistory], Error>
-  func getSessionsHistory(completion: ((SessionHistoryResult) -> Void)?) {
-    let operation = GetSessionsHistoryOperation()
-    operation.completionBlock = { completion?(operation.result) }
-    NetworkQueue.shared.addOperation(operation: operation)
-  }
-
 }
 
+//----------------------------------------------------------------------------
+// MARK: - Table View control
+//----------------------------------------------------------------------------
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+  func numberOfSections(in tableView: UITableView) -> Int {
     return sessions.count
+  }
+
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return "Phase \(section + 1)"
+  }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return sessions[section]?.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "session")
-    let session = sessions[indexPath.row]
+    let session = sessions[indexPath.section]?[indexPath.row]
 
-    if let cell = cell as? SessionTableViewCell {
-      cell.date = Date(timeIntervalSince1970: session.startedAt).description
+    if let cell = cell as? SessionTableViewCell, let session = session {
+      cell.date = dateFormatter.string(from: Date(timeIntervalSince1970: session.startedAt))
       cell.index = session.sessionId
       cell.duration = session.duration / 60
     }
