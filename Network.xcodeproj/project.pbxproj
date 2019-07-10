@@ -43,6 +43,7 @@
 		4D853B5522CCD05900FE7CE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D853B5422CCD05900FE7CE8 /* LaunchScreen.storyboard */; };
 		4D853B5722CCD06200FE7CE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D853B5622CCD06100FE7CE8 /* Main.storyboard */; };
 		4DB44D0722D5EBD500C6ED78 /* ApiTokenProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */; };
+		4DB44D0922D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB44D0822D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift */; };
 		A90F49D422D37E4A00B124B6 /* GetQrCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D322D37E4A00B124B6 /* GetQrCodeRequest.swift */; };
 		A90F49D622D381C900B124B6 /* QrCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D522D381C900B124B6 /* QrCode.swift */; };
 		A90F49D822D3835500B124B6 /* GetQrCodeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D722D3835500B124B6 /* GetQrCodeOperation.swift */; };
@@ -104,6 +105,7 @@
 		4D853B5422CCD05900FE7CE8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D853B5622CCD06100FE7CE8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Network/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTokenProviderTests.swift; sourceTree = "<group>"; };
+		4DB44D0822D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonEnvelopeDecoder.swift; sourceTree = "<group>"; };
 		A90F49D322D37E4A00B124B6 /* GetQrCodeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQrCodeRequest.swift; sourceTree = "<group>"; };
 		A90F49D522D381C900B124B6 /* QrCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCode.swift; sourceTree = "<group>"; };
 		A90F49D722D3835500B124B6 /* GetQrCodeOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQrCodeOperation.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				248668AE22C4962C00425512 /* HTTPMethod.swift */,
 				24D8B2B922C3DFC800AC462B /* RequestProtocol.swift */,
 				2400847322CB3C6A00C18CDC /* Custom Requests */,
+				4DB44D0822D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				A90F49D622D381C900B124B6 /* QrCode.swift in Sources */,
 				24C239D222CA24C4002FF6CA /* GetPostRequest.swift in Sources */,
 				4D4EBBEB22D49B9600199055 /* Session.swift in Sources */,
+				4DB44D0922D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift in Sources */,
 				4D853B5222CCAE7300FE7CE8 /* TokenType.swift in Sources */,
 				A921C84922D4A04400455A84 /* SessionTableViewCell.swift in Sources */,
 				249B780F22C42197007A0882 /* NetworkQueue.swift in Sources */,

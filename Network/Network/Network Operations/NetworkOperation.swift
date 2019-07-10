@@ -2,7 +2,7 @@ import Foundation
 
 class NetworkOperation<
     ResultSuccessType,
-    DataItemType: Codable,
+    EnvelopeDataItemType: Codable,
     RequestType: ApiRequestProtocol
 >: AsynchronousBlockOperation {
 
@@ -35,10 +35,6 @@ class NetworkOperation<
       case .failure(let error): failure?(error)
       }
     }
-  }
-
-  var isResultSuccessTypeArray: Bool {
-    return ResultSuccessType.self is Array<DataItemType>.Type
   }
 
   //----------------------------------------------------------------------------
@@ -76,24 +72,10 @@ class NetworkOperation<
 
   private func handleSuccess(data: Data) {
     do {
-      let envelope =
-        try JSONDecoder().decode(MeloRequestModel<DataItemType>.self,
-                                 from: data)
-
-      if isResultSuccessTypeArray {
-        guard let item = envelope.data as? ResultSuccessType else {
-          handleFailure(error: NetworkError.invalidEnvelopeData)
-          return
-        }
-        result = ResultType.success(item)
-      } else {
-        guard let item = envelope.data.first as? ResultSuccessType else {
-          handleFailure(error: NetworkError.invalidEnvelopeData)
-          return
-        }
-        result = ResultType.success(item)
-      }
-      
+      // TODO: move data decoding into request.
+      let item = try JsonEnvelopeDecoder
+        <ResultSuccessType, EnvelopeDataItemType>.decode(data: data)
+      result = ResultType.success(item)
     } catch {
       handleFailure(error: error)
     }
@@ -109,18 +91,11 @@ class NetworkOperation<
 
   override func main() {
     service.start()
-    //    sleep(1)
   }
 
   override func cancel() {
     super.cancel()
     service.cancel()
   }
-
-  //----------------------------------------------------------------------------
-  // MARK: - Shitty Utility
-  //----------------------------------------------------------------------------
-
-
 
 }
