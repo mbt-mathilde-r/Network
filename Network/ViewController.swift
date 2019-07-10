@@ -37,7 +37,12 @@ class ViewController: UIViewController {
     tableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil),
                        forCellReuseIdentifier: "session")
 
-    getSessionsHistory() { result in
+    let parameters = SessionHistoryParameters(phase: 0,
+                                              level: nil,
+                                              _limit: nil,
+                                              _skip: nil,
+                                              _sort_order: nil)
+    getSessionsHistory(parameters: parameters) { result in
       switch result {
       case .success(let session): self.sessions = [session]
       case .failure(let error): print("error : \(error)")
@@ -54,7 +59,6 @@ class ViewController: UIViewController {
   typealias SessionHistoryResult = Result<SessionHistory, Error>
   func getSessionsHistory(parameters: SessionHistoryParameters? = nil,
                           completion: ((SessionHistoryResult) -> Void)?) {
-    let parameters = SessionHistoryParameters(phase: 0, level: 0, _limit: 10, _skip: 0, _sort_order: 1)
     let operation = GetSessionsHistoryOperation(parameters: parameters)
     operation.completionBlock = { completion?(operation.result) }
     NetworkQueue.shared.addOperation(operation: operation)
@@ -66,6 +70,7 @@ class ViewController: UIViewController {
 //----------------------------------------------------------------------------
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return sessions.count
   }
