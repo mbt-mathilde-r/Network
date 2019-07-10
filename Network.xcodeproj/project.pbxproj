@@ -12,7 +12,7 @@
 		248668AF22C4962C00425512 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668AE22C4962C00425512 /* HTTPMethod.swift */; };
 		248668B122C4994600425512 /* QueryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668B022C4994500425512 /* QueryBuilder.swift */; };
 		248668B322C49E4400425512 /* ApiServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668B222C49E4400425512 /* ApiServiceProtocol.swift */; };
-		249B77FF22C410D9007A0882 /* BackendAuthentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B77FE22C410D9007A0882 /* BackendAuthentification.swift */; };
+		249B77FF22C410D9007A0882 /* ApiTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B77FE22C410D9007A0882 /* ApiTokenProvider.swift */; };
 		249B780422C41359007A0882 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B780322C41359007A0882 /* NetworkOperation.swift */; };
 		249B780A22C41B8F007A0882 /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B780922C41B8F007A0882 /* EncodableExtension.swift */; };
 		249B780F22C42197007A0882 /* NetworkQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B780E22C42197007A0882 /* NetworkQueue.swift */; };
@@ -39,10 +39,10 @@
 		4D54E56C22D324B2007B7C18 /* AsynchronousBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54E56B22D324B2007B7C18 /* AsynchronousBlockOperation.swift */; };
 		4D54E56E22D35D64007B7C18 /* HeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54E56D22D35D64007B7C18 /* HeaderField.swift */; };
 		4D853B4E22CCAC0300FE7CE8 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D853B4D22CCAC0300FE7CE8 /* UrlRequestBuilder.swift */; };
-		4D853B5022CCAC7F00FE7CE8 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D853B4F22CCAC7F00FE7CE8 /* TokenProvider.swift */; };
 		4D853B5222CCAE7300FE7CE8 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D853B5122CCAE7300FE7CE8 /* TokenType.swift */; };
 		4D853B5522CCD05900FE7CE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D853B5422CCD05900FE7CE8 /* LaunchScreen.storyboard */; };
 		4D853B5722CCD06200FE7CE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D853B5622CCD06100FE7CE8 /* Main.storyboard */; };
+		4DB44D0722D5EBD500C6ED78 /* ApiTokenProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */; };
 		A90F49D422D37E4A00B124B6 /* GetQrCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D322D37E4A00B124B6 /* GetQrCodeRequest.swift */; };
 		A90F49D622D381C900B124B6 /* QrCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D522D381C900B124B6 /* QrCode.swift */; };
 		A90F49D822D3835500B124B6 /* GetQrCodeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D722D3835500B124B6 /* GetQrCodeOperation.swift */; };
@@ -69,7 +69,7 @@
 		248668AE22C4962C00425512 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		248668B022C4994500425512 /* QueryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryBuilder.swift; sourceTree = "<group>"; };
 		248668B222C49E4400425512 /* ApiServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceProtocol.swift; sourceTree = "<group>"; };
-		249B77FE22C410D9007A0882 /* BackendAuthentification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAuthentification.swift; sourceTree = "<group>"; };
+		249B77FE22C410D9007A0882 /* ApiTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTokenProvider.swift; sourceTree = "<group>"; };
 		249B780322C41359007A0882 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		249B780922C41B8F007A0882 /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
 		249B780E22C42197007A0882 /* NetworkQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQueue.swift; sourceTree = "<group>"; };
@@ -100,10 +100,10 @@
 		4D54E56B22D324B2007B7C18 /* AsynchronousBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousBlockOperation.swift; sourceTree = "<group>"; };
 		4D54E56D22D35D64007B7C18 /* HeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderField.swift; sourceTree = "<group>"; };
 		4D853B4D22CCAC0300FE7CE8 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilder.swift; sourceTree = "<group>"; };
-		4D853B4F22CCAC7F00FE7CE8 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		4D853B5122CCAE7300FE7CE8 /* TokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
 		4D853B5422CCD05900FE7CE8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D853B5622CCD06100FE7CE8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Network/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTokenProviderTests.swift; sourceTree = "<group>"; };
 		A90F49D322D37E4A00B124B6 /* GetQrCodeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQrCodeRequest.swift; sourceTree = "<group>"; };
 		A90F49D522D381C900B124B6 /* QrCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCode.swift; sourceTree = "<group>"; };
 		A90F49D722D3835500B124B6 /* GetQrCodeOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQrCodeOperation.swift; sourceTree = "<group>"; };
@@ -291,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */,
+				4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -298,8 +299,7 @@
 		4D853B5322CCAE8500FE7CE8 /* Token */ = {
 			isa = PBXGroup;
 			children = (
-				249B77FE22C410D9007A0882 /* BackendAuthentification.swift */,
-				4D853B4F22CCAC7F00FE7CE8 /* TokenProvider.swift */,
+				249B77FE22C410D9007A0882 /* ApiTokenProvider.swift */,
 				4D853B5122CCAE7300FE7CE8 /* TokenType.swift */,
 			);
 			path = Token;
@@ -461,7 +461,7 @@
 				248668B122C4994600425512 /* QueryBuilder.swift in Sources */,
 				24D8B2BA22C3DFC800AC462B /* RequestProtocol.swift in Sources */,
 				24D8B2AD22C3A2B200AC462B /* ApiRequestProtocol.swift in Sources */,
-				249B77FF22C410D9007A0882 /* BackendAuthentification.swift in Sources */,
+				249B77FF22C410D9007A0882 /* ApiTokenProvider.swift in Sources */,
 				24C239D022CA2470002FF6CA /* PostModel.swift in Sources */,
 				A90F49E022D3960800B124B6 /* GetConfigOperation.swift in Sources */,
 				24D8B2B522C3B61100AC462B /* UrlSessionApiService.swift in Sources */,
@@ -487,7 +487,6 @@
 				4D4EBBEB22D49B9600199055 /* Session.swift in Sources */,
 				4D853B5222CCAE7300FE7CE8 /* TokenType.swift in Sources */,
 				A921C84922D4A04400455A84 /* SessionTableViewCell.swift in Sources */,
-				4D853B5022CCAC7F00FE7CE8 /* TokenProvider.swift in Sources */,
 				249B780F22C42197007A0882 /* NetworkQueue.swift in Sources */,
 				4D54E56C22D324B2007B7C18 /* AsynchronousBlockOperation.swift in Sources */,
 				24A4146F22C23A2800CDEB4B /* AppDelegate.swift in Sources */,
@@ -501,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB44D0722D5EBD500C6ED78 /* ApiTokenProviderTests.swift in Sources */,
 				4D4EBBEE22D4CDC600199055 /* ApiServerConfigurationTests.swift in Sources */,
 				24A4148422C23A2900CDEB4B /* NetworkTests.swift in Sources */,
 			);

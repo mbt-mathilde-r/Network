@@ -45,7 +45,7 @@ class NetworkTests: XCTestCase {
 
 
 
-
+/*
 
 
 
@@ -397,5 +397,7 @@ class NetworkTests: XCTestCase {
 
     while true { }
   }
+
+ */
 
 }
