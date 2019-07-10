@@ -44,4 +44,8 @@ final class PostPostRequest: RequestProtocol {
     return model.dictionary
   }
 
+  var tokenType: TokenType {
+    return .none
+  }
+
 }

@@ -46,4 +46,8 @@ final class GetPostRequest: RequestProtocol {
     return nil
   }
 
+  var tokenType: TokenType {
+    return .none
+  }
+
 }

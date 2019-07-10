@@ -10,6 +10,8 @@ protocol ApiRequestProtocol {
 
   var query: String? { get } // PercentEncodedQuery
 
+  var tokenType: TokenType { get }
+
   var headers: [String: String]? { get }
 
   // Used for POST, PATCH AND PUT
@@ -26,8 +28,16 @@ protocol ApiRequestProtocol {
 extension ApiRequestProtocol {
 
   var headers: [String: String]? {
+    var headers = [String: String]()
+
     let contentType = HeaderField.contentType.rawValue
-    let headers = [contentType.key: contentType.value]
+    headers[contentType.key] = contentType.value
+
+    let authorization = HeaderField.authorization(tokenType: tokenType).rawValue
+    if tokenType != .none {
+      headers[authorization.key] = authorization.value
+    }
+
     return headers
   }
 

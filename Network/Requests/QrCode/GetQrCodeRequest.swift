@@ -45,4 +45,9 @@ final class GetQrCodeRequest: RequestProtocol {
   var parameters: [String : Any]? {
     return ["qrcode": qrcode]
   }
+
+  var tokenType: TokenType {
+    return .none
+  }
+
 }
