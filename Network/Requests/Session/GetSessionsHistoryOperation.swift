@@ -42,6 +42,7 @@ final class GetSessionsHistoryRequest: RequestProtocol {
 }
 
 typealias SessionHistoryNetworkOperation = NetworkOperation<
+  [SessionHistory],
   SessionHistory,
   GetSessionsHistoryRequest
 >
