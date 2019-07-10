@@ -40,13 +40,10 @@ class NetworkServiceProvider: NSObject {
     task = URLSession.shared.dataTask(with: urlRequest) {
       data, response, error in
       defer { self.task = nil }
-//      print("\(urlRequest.url?.absoluteString ?? "wrong url") task completed.")
-      self.isValidResponse(dataTaskResult: (data, response, error)) {
-        result in
-        switch result {
-        case .failure(let failureError): completion(.failure(failureError))
-        case .success(let valideData): completion(.success(valideData))
-        }
+      //print("\(urlRequest.url?.absoluteString ?? "wrong url") task completed.")
+      switch self.isValid(dataTaskResult: (data, response, error)) {
+      case .failure(let failureError): completion(.failure(failureError))
+      case .success(let valideData): completion(.success(valideData))
       }
     }
   }
@@ -66,32 +63,30 @@ class NetworkServiceProvider: NSObject {
   // MARK: - Validity
   //----------------------------------------------------------------------------
 
-  private func isValidResponse(
-    dataTaskResult: DataTaskResult,
-    completion: @escaping ((Result<Data, Error>) -> Void)) {
-    if let error = dataTaskResult.error {
-      completion(.failure(error))
-      return
-    }
+  private func isValidResponse(response: HTTPURLResponse) -> Bool {
+    let isValidResponse = 200...299 ~= response.statusCode
+    return isValidResponse
+  }
+
+  private func isValid(dataTaskResult: DataTaskResult) -> Result<Data, Error> {
+    if let error = dataTaskResult.error { return .failure(error) }
 
     guard let response = dataTaskResult.response as? HTTPURLResponse else {
-      completion(.failure(URLSessionError.notAHttpUrlResponse))
-      return
+      return .failure(URLSessionError.notAHttpUrlResponse)
     }
 
-    guard NetworkError.isValidResponse(response: response) == true else {
+    guard isValidResponse(response: response) == true else {
       let error = URLSessionError.invalidHTTPURLResponse(response: response)
-      completion(.failure(error))
-      return
+      return .failure(error)
     }
+
     //print("response:\n\(response)")
 
     guard let data = dataTaskResult.data else {
-      completion(.failure(URLSessionError.emptyData))
-      return
+      return .failure(URLSessionError.emptyData)
     }
 
-    completion(.success(data))
+    return .success(data)
   }
 
 }
