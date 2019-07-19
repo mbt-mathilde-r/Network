@@ -29,13 +29,22 @@ class NetworkOperation<
   private(set) var result: ResultType
     = ResultType.failure(NetworkError.invalidResult)  {
     didSet {
-      finish()
+
       switch result {
       case .success(let data): success?(data)
       case .failure(let error): failure?(error)
       }
+
+      DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
+        self.completionBlockInMainThread?(self.result)
+      }
+
+      finish()
     }
   }
+
+  var completionBlockInMainThread: ((ResultType) -> Void)?
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization

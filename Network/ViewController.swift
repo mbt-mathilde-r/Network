@@ -14,9 +14,7 @@ class ViewController: UIViewController {
 
   var sessions = [Int: [SessionHistory]]() {
     didSet {
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-      }
+      self.tableView.reloadData()
     }
   }
 
@@ -35,6 +33,28 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    let op = GetSessionsOperation()
+    op.completionBlock = {
+      if Thread.isMainThread {
+        print("Main Thread")
+      } else {
+        print("Background Thread")
+      }
+    }
+//     let op = BlockOperation {
+//      if Thread.isMainThread {
+//        print("Main Thread")
+//      } else {
+//        print("Background Thread")
+//      }
+//    }
+
+//    NetworkQueue.shared.addOperation(operation: op)
+
+    OperationQueue.main.addOperation(op)
+
+    return
 
     tableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil),
                        forCellReuseIdentifier: "session")
@@ -76,7 +96,10 @@ class ViewController: UIViewController {
     let operations = phases.map { phase -> Operation in
       let parameters = SessionHistoryParameters(phase: phase.index)
       let operation = GetSessionsHistoryOperation(parameters: parameters)
-      operation.completionBlock = { completion?(operation.result) }
+//      operation.completionBlock = { completion?(operation.result) }
+      operation.completionBlockInMainThread = { result in
+        completion?(result)
+      }
       return operation
     }
     NetworkQueue.shared.addOperations(operations: operations)
@@ -89,7 +112,10 @@ class ViewController: UIViewController {
   ///   - failure: failure closure with error message
   func getConfig(completion: ((Result<Config, Error>) -> Void)?) {
     let operation = GetConfigOperation()
-    operation.completionBlock = { completion?(operation.result) }
+//    operation.completionBlock = { completion?(operation.result) }
+    operation.completionBlockInMainThread = { result in
+      completion?(result)
+    }
     NetworkQueue.shared.addOperation(operation: operation)
   }
 
@@ -100,7 +126,10 @@ class ViewController: UIViewController {
   ///   - failure: failure closure with error message
   func getSessions(completion: ((Result<[Session], Error>) -> Void)?) {
     let operation = GetSessionsOperation()
-    operation.completionBlock = { completion?(operation.result) }
+//    operation.completionBlock = { completion?(operation.result) }
+    operation.completionBlockInMainThread = { result in
+      completion?(result)
+    }
     NetworkQueue.shared.addOperation(operation: operation)
   }
 }

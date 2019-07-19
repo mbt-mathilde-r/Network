@@ -45,6 +45,30 @@ class NetworkTests: XCTestCase {
 
 
 
+  func testSimple() {
+    let getSessionOperation = GetSessionsOperation()
+    getSessionOperation.completionBlock = {
+      if Thread.isMainThread {
+        print("Main Thread")
+      } else {
+        print("Background Thread")
+      }
+    }
+
+    getSessionOperation.completionBlockInMainThread = { result in
+      if Thread.isMainThread {
+        print("Main Thread")
+      } else {
+        print("Background Thread")
+      }
+    }
+
+    NetworkQueue.shared.addOperation(operation: getSessionOperation)
+
+    while true { }
+  }
+
+
 /*
 
 

@@ -66,6 +66,7 @@ class AsynchronousBlockOperation: BlockOperation {
 
   func finish() {
     state = .finished
+    print("task is Finished.")
   }
 
 }
