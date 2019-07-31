@@ -45,7 +45,9 @@ class UrlRequestBuilder {
     apiConfiguration: ApiServerConfiguration
     ) -> URL? {
     var urlComponent = apiConfiguration.baseURL
-    urlComponent.path = apiConfiguration.version + request.endpoint
+
+    // apiConfiguration.version + request.endpoint
+    urlComponent.path = request.endpoint
     urlComponent.percentEncodedQuery = request.query
 
     guard let url = urlComponent.url else {
@@ -54,7 +56,6 @@ class UrlRequestBuilder {
       return nil
     }
 
-//    print("url: \(url)")
     return url
   }
 

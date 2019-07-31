@@ -14,7 +14,7 @@ class UrlSessionApiService: ApiServiceProtocol {
   //----------------------------------------------------------------------------
 
   private let configuration: ApiServerConfiguration
-  private let service = NetworkServiceProvider()
+  private let service: NetworkServiceProviderProtocol
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization
@@ -22,6 +22,7 @@ class UrlSessionApiService: ApiServiceProtocol {
 
   init(configuration: ApiServerConfiguration = ApiServerConfiguration.shared) {
     self.configuration = configuration
+    service = NetworkServiceProvider()
   }
 
   //----------------------------------------------------------------------------
@@ -57,3 +58,25 @@ class UrlSessionApiService: ApiServiceProtocol {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+//protocol UrlSessionApiServiceTestable {
+//    init(mockedService: NetworkServiceProviderProtocol)
+//}
+//
+//extension UrlSessionApiServiceTestable where Self: UrlSessionApiService {
+//
+//    init(mockedService: NetworkServiceProviderProtocol)   {
+//        self.configuration = configuration
+//        service = mockedService
+//    }
+//
+//}

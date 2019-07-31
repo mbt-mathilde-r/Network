@@ -1,5 +1,12 @@
 import Foundation
 
+protocol NetworkServiceProviderProtocol {
+    func setup(urlRequest: URLRequest,
+               completion: @escaping ((Result<Data, Error>) -> Void))
+    func start()
+    func cancel()
+}
+
 /*******************************************************************************
  * NetworkServiceProvider
  *
@@ -9,7 +16,7 @@ import Foundation
  *
  ******************************************************************************/
 
-class NetworkServiceProvider: NSObject {
+class NetworkServiceProvider: NSObject, NetworkServiceProviderProtocol {
 
   //----------------------------------------------------------------------------
   // MARK: - Properties

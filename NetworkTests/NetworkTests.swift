@@ -69,6 +69,52 @@ class NetworkTests: XCTestCase {
   }
 
 
+
+
+
+
+
+
+
+  //----------------------------------------------------------------------------
+  // MARK: - Batch
+  //----------------------------------------------------------------------------
+
+  func testBatch() {
+    let batcher = Batcher()
+
+    batcher.addData(title: "One")
+
+    sleep(2)
+
+    batcher.addData(title: "Two")
+
+    sleep(2)
+
+    batcher.addData(title: "Three")
+
+    while true { }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 

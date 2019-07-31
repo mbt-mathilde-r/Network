@@ -15,7 +15,7 @@ final class ApiServerConfiguration {
   /******************** URL ********************/
 
   private var host: String {
-    return "api.devz.mybraintech.com"
+    return "jsonplaceholder.typicode.com" //"api.devz.mybraintech.com"
   }
 
   var version: String {

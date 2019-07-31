@@ -1,7 +1,7 @@
 import Foundation
 
 class NetworkOperation<
-    ResultSuccessType,
+    ResultSuccessType: Codable,
     EnvelopeDataItemType: Codable,
     RequestType: ApiRequestProtocol
 >: AsynchronousBlockOperation {
@@ -82,8 +82,11 @@ class NetworkOperation<
   private func handleSuccess(data: Data) {
     do {
       // TODO: move data decoding into request.
-      let item = try JsonEnvelopeDecoder
-        <ResultSuccessType, EnvelopeDataItemType>.decode(data: data)
+//      let item = try JsonEnvelopeDecoder
+//        <ResultSuccessType, EnvelopeDataItemType>.decode(data: data)
+
+    let item = try JSONDecoder().decode(ResultSuccessType.self, from: data)
+
       result = ResultType.success(item)
     } catch {
       handleFailure(error: error)

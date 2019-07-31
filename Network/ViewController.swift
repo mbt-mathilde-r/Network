@@ -33,7 +33,8 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    return
+    
     let op = GetSessionsOperation()
     op.completionBlock = {
       if Thread.isMainThread {
