@@ -175,11 +175,11 @@
 			isa = PBXGroup;
 			children = (
 				24A4149022C23A5D00CDEB4B /* NetworkServiceProvider.swift */,
-				4D853B5322CCAE8500FE7CE8 /* Token */,
 				4D853B4D22CCAC0300FE7CE8 /* UrlRequestBuilder.swift */,
-				24D8B2B422C3B61100AC462B /* UrlSessionApiService.swift */,
-				24D8B2AA22C3900100AC462B /* ApiServerConfiguration.swift */,
 				248668B222C49E4400425512 /* ApiServiceProtocol.swift */,
+				24D8B2B422C3B61100AC462B /* UrlSessionApiService.swift */,
+				4D853B5322CCAE8500FE7CE8 /* Token */,
+				24D8B2AA22C3900100AC462B /* ApiServerConfiguration.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";

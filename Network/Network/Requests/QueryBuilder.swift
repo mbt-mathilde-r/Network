@@ -3,10 +3,6 @@ import Foundation
 // https://cocoacasts.com/working-with-nsurlcomponents-in-swift
 class QueryBuilder {
 
-  //----------------------------------------------------------------------------
-  // MARK: - Build
-  //----------------------------------------------------------------------------
-
   static func build(from parameters: [String: Any]?) -> String? {
     guard let parameters = parameters else { return nil }
 

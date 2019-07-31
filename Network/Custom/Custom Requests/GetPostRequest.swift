@@ -1,8 +1,6 @@
 import Foundation
 
-// TODO: Rename with "<modelName><HttpMethod>Request"
 final class GetPostRequest: RequestProtocol {
-
 
   //----------------------------------------------------------------------------
   // MARK: - Properties

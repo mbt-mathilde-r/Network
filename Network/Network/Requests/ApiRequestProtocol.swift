@@ -4,20 +4,20 @@ protocol ApiRequestProtocol {
   
   var endpoint: String { get }
 
-  var method: HTTPMethod { get } // get, post, patch
+  var method: HTTPMethod { get }
 
   var queryType: QueryType { get }
 
-  var query: String? { get } // PercentEncodedQuery
+  var query: String? { get }
 
   var tokenType: TokenType { get }
 
   var headers: [String: String]? { get }
 
-  // Used for POST, PATCH AND PUT
   var httpBody: Data? { get }
 
   var parameters: [String: Any]? { get }
+  
 }
 
 
