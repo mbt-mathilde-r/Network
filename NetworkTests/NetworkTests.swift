@@ -44,26 +44,15 @@ class NetworkTests: XCTestCase {
   }
 
 
+  //----------------------------------------------------------------------------
+  // MARK: - Demo
+  //----------------------------------------------------------------------------
 
   func testSimple() {
-    let getSessionOperation = GetSessionsOperation()
-    getSessionOperation.completionBlock = {
-      if Thread.isMainThread {
-        print("Main Thread")
-      } else {
-        print("Background Thread")
-      }
-    }
-
-    getSessionOperation.completionBlockInMainThread = { result in
-      if Thread.isMainThread {
-        print("Main Thread")
-      } else {
-        print("Background Thread")
-      }
-    }
-
-    NetworkQueue.shared.addOperation(operation: getSessionOperation)
+    let getPostOperation = GetPostOperation(postId: 1)
+    getPostOperation.success = { model in print("Success: \(model.userId)") }
+    getPostOperation.failure = { error in print("\(error)") }
+    NetworkQueue.shared.addOperation(operation: getPostOperation)
 
     while true { }
   }
