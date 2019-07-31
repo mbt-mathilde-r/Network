@@ -6,6 +6,7 @@ protocol ApiServiceProtocol {
              completion: @escaping ((Result<Data, Error>) -> Void))
 
   func start()
+  
   func cancel()
 
 }

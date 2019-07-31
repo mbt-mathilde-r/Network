@@ -14,3 +14,15 @@ enum NetworkError : Error {
   case invalidEnvelopeData
 
 }
+
+enum URLSessionError: Error {
+
+  //----------------------------------------------------------------------------
+  // MARK: - Cases
+  //----------------------------------------------------------------------------
+
+  case notAHttpUrlResponse
+  case invalidHTTPURLResponse(response: HTTPURLResponse)
+  case emptyData
+
+}

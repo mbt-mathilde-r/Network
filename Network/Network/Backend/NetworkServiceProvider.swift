@@ -1,20 +1,14 @@
 import Foundation
 
-// Without JWTDecode: https://stackoverflow.com/a/40915703/2448287
+/*******************************************************************************
+ * NetworkServiceProvider
+ *
+ * Allows you to execute HTTP request, it incorporates NSURLSession internally.
+ * Every network service can execute just one request at a time, can cancel the
+ * request (big advantage), and has callbacks for success and failure responses.
+ *
+ ******************************************************************************/
 
-
-// Backend Network provider. URLSession but could be Alamofire or other
-
-enum URLSessionError: Error {
-  case notAHttpUrlResponse
-  case invalidHTTPURLResponse(response: HTTPURLResponse)
-  case emptyData
-}
-
-
-//allows you to execute HTTP request, it incorporates NSURLSession internally.
-//Every network service can execute just one request at a time, can cancel the
-//request (big advantage), and has callbacks for success and failure responses.
 class NetworkServiceProvider: NSObject {
 
   //----------------------------------------------------------------------------

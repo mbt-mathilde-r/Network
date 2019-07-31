@@ -167,7 +167,6 @@
 				249B780E22C42197007A0882 /* NetworkQueue.swift */,
 				4D54E56B22D324B2007B7C18 /* AsynchronousBlockOperation.swift */,
 				249B780322C41359007A0882 /* NetworkOperation.swift */,
-				2400847422CB3C8E00C18CDC /* Custom Operations */,
 			);
 			path = "Network Operations";
 			sourceTree = "<group>";
@@ -202,7 +201,6 @@
 				248668B022C4994500425512 /* QueryBuilder.swift */,
 				248668AE22C4962C00425512 /* HTTPMethod.swift */,
 				24D8B2B922C3DFC800AC462B /* RequestProtocol.swift */,
-				2400847322CB3C6A00C18CDC /* Custom Requests */,
 				4DB44D0822D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift */,
 			);
 			path = Requests;
@@ -237,14 +235,14 @@
 		24A4146D22C23A2800CDEB4B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A921C84622D4A02800455A84 /* Views */,
-				A921C84522D4A01B00455A84 /* Requests */,
-				A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */,
+				24A4148E22C23A3100CDEB4B /* Supporting Files */,
+				249B780822C41B7D007A0882 /* Extensions */,
+				4D51410722F1C776001676F8 /* Melomind */,
+				4D51410622F1C732001676F8 /* Custom */,
+				4DE2518A22E1CB2A0045F697 /* Batch upload */,
 				24A4147A22C23A2900CDEB4B /* Info.plist */,
 				24A4147022C23A2800CDEB4B /* ViewController.swift */,
 				4D853B5622CCD06100FE7CE8 /* Main.storyboard */,
-				24A4148E22C23A3100CDEB4B /* Supporting Files */,
-				249B780822C41B7D007A0882 /* Extensions */,
 				24A4148F22C23A4A00CDEB4B /* Network */,
 			);
 			path = Network;
@@ -277,7 +275,6 @@
 				249B780222C41258007A0882 /* Errors */,
 				249B780122C41131007A0882 /* Backend */,
 				249B780022C4111F007A0882 /* Network Operations */,
-				24D8B2B622C3D20200AC462B /* Model */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -299,6 +296,26 @@
 			path = Backend;
 			sourceTree = "<group>";
 		};
+		4D51410622F1C732001676F8 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				24D8B2B622C3D20200AC462B /* Model */,
+				2400847422CB3C8E00C18CDC /* Custom Operations */,
+				2400847322CB3C6A00C18CDC /* Custom Requests */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		4D51410722F1C776001676F8 /* Melomind */ = {
+			isa = PBXGroup;
+			children = (
+				A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */,
+				A921C84622D4A02800455A84 /* Views */,
+				A921C84522D4A01B00455A84 /* Requests */,
+			);
+			path = Melomind;
+			sourceTree = "<group>";
+		};
 		4D853B5322CCAE8500FE7CE8 /* Token */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +323,13 @@
 				4D853B5122CCAE7300FE7CE8 /* TokenType.swift */,
 			);
 			path = Token;
+			sourceTree = "<group>";
+		};
+		4DE2518A22E1CB2A0045F697 /* Batch upload */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Batch upload";
 			sourceTree = "<group>";
 		};
 		A90F49DD22D395E600B124B6 /* QrCode */ = {
@@ -679,6 +703,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23T8TD424J;
 				INFOPLIST_FILE = NetworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -699,6 +724,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23T8TD424J;
 				INFOPLIST_FILE = NetworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

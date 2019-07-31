@@ -1,8 +1,5 @@
 import Foundation
 
-//the class that takes requests related to the backend.
-//It uses NetworkService internally.
-
 /*******************************************************************************
  * UrlSessionApiService
  *
@@ -32,7 +29,7 @@ class UrlSessionApiService: ApiServiceProtocol {
   //----------------------------------------------------------------------------
 
   func setup(with request: ApiRequestProtocol,
-               completion: @escaping ((Result<Data, Error>) -> Void)) {
+             completion: @escaping ((Result<Data, Error>) -> Void)) {
 
     guard let urlRequest =
       UrlRequestBuilder.buildUrlRequest(from: request,
@@ -45,10 +42,8 @@ class UrlSessionApiService: ApiServiceProtocol {
 
     service.setup(urlRequest: urlRequest) { result in
       switch result {
-      case .success(let data):
-        completion(.success(data))
-      case .failure(let error):
-        completion(.failure(error))
+      case .success(let data): completion(.success(data))
+      case .failure(let error): completion(.failure(error))
       }
     }
   }

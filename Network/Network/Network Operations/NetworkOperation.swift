@@ -18,7 +18,7 @@ class NetworkOperation<
 
   private let service = UrlSessionApiService()
 
-  private var request: RequestType
+  var request: RequestType
 
   /******************** Result ********************/
 
