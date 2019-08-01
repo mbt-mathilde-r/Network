@@ -22,7 +22,7 @@ final class Batcher {
                                          body: body)
 
     newOperation.success = { model in
-      print("Batch with index: \(model.title)")
+      print("Batch \(model.title) with index: \(model.userId)")
     }
 
     NetworkQueue.shared.addOperation(operation: newOperation)

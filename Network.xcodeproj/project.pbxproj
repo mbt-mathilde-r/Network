@@ -291,9 +291,9 @@
 		24A4148222C23A2900CDEB4B /* NetworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				24A4148322C23A2900CDEB4B /* NetworkTests.swift */,
 				24BDC18022F2454F002DC8A1 /* Requests */,
 				4D4EBBEC22D4CD9800199055 /* Backend */,
-				24A4148322C23A2900CDEB4B /* NetworkTests.swift */,
 				24A4148522C23A2900CDEB4B /* Info.plist */,
 			);
 			path = NetworkTests;

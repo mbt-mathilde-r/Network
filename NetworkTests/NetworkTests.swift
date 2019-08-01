@@ -44,6 +44,19 @@ class NetworkTests: XCTestCase {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   //----------------------------------------------------------------------------
   // MARK: - Demo
   //----------------------------------------------------------------------------
@@ -52,10 +65,20 @@ class NetworkTests: XCTestCase {
     let getPostOperation = GetPostOperation(postId: 1)
     getPostOperation.success = { model in print("Success: \(model.userId)") }
     getPostOperation.failure = { error in print("\(error)") }
+
     NetworkQueue.shared.addOperation(operation: getPostOperation)
 
     while true { }
   }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -73,13 +96,9 @@ class NetworkTests: XCTestCase {
     let batcher = Batcher()
 
     batcher.addData(title: "One")
-
     sleep(2)
-
     batcher.addData(title: "Two")
-
     sleep(2)
-
     batcher.addData(title: "Three")
 
     while true { }
@@ -101,113 +120,24 @@ class NetworkTests: XCTestCase {
 
 
 
-
-
-
-/*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  func testSimple() {
-    let getPostOperation = GetPostOperation(postId: 1)
-    getPostOperation.success = { model in print("Success: \(model.userId)") }
-    getPostOperation.failure = { error in print("\(error)") }
-    NetworkQueue.shared.addOperation(operation: getPostOperation)
-
-    while true { }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   func testMultipleCall() {
 
-    /******************** Post operation ********************/
+    /******************** Get operation ********************/
 
     let getPostOperation = GetPostOperation(postId: 4)
 
-    getPostOperation.completionBlock = {
-      switch getPostOperation.result {
-      case .success(let data): print("Get compl Success: \(data.userId)");
-      case .failure(let error): print("Get compl Faillure \(error.localizedDescription)")
-      }
-    }
-
-    getPostOperation.success = { model in
-      print("Get Succed: \(model.userId)")
-    }
-    getPostOperation.failure = { error in
-      print("Get Failed: \(error.localizedDescription)")
-    }
+    getPostOperation.success = { model in print("Get Succed: \(model.userId)") }
+    getPostOperation.failure = { error in print("Get Failed: \(error)") }
 
     /******************** Post operation ********************/
 
     let postPostOperation =
       PostPostOperation(userId: 13, title: "title", body: "body")
 
-    postPostOperation.completionBlock = {
-      switch postPostOperation.result {
-      case .success(let data): print("Post compl Success: \(data.userId)")
-      case .failure(let error): print("Post compl Faillure \(error.localizedDescription)")
-      }
-    }
+    postPostOperation.success = { model in print("Post Succed: \(model.userId)") }
+    postPostOperation.failure = { error in print("Post Failed: \(error)") }
 
-    postPostOperation.success = { model in
-      print("Post Succed: \(model.userId)")
-    }
-    postPostOperation.failure = { error in
-      print("Post Failed: \(error.localizedDescription)")
-    }
-
-
-
+    /******************** Settings ********************/
 
     let manualAdding = false
     let dependency = false
@@ -257,20 +187,16 @@ class NetworkTests: XCTestCase {
                           body: "body",
                           dependencies: [getPostOperation])
 
-      postPostDepOperation.completionBlock = {
-        switch postPostDepOperation.result {
-        case .success(let data): print("Post compl Success: \(data.userId)")
-        case .failure(let error): print("Post compl Faillure \(error.localizedDescription)")
-        }
-      }
-      postPostDepOperation.success = { model in print("Post Succed: \(model.userId)") }
-      postPostDepOperation.failure = { error in print("Post Failed: \(error.localizedDescription)") }
+      postPostDepOperation.success =
+        { model in print("Post 2 Succed: \(model.userId)") }
+      postPostDepOperation.failure =
+        { error in print("Post 2 Failed: \(error.localizedDescription)") }
 
-//      NetworkQueue.shared.addOperation(operation: getPostOperation)
-//      NetworkQueue.shared.addOperation(operation: postPostDepOperation)
-
-      NetworkQueue.shared.addOperation(operation: postPostDepOperation)
       NetworkQueue.shared.addOperation(operation: getPostOperation)
+      NetworkQueue.shared.addOperation(operation: postPostDepOperation)
+
+//      NetworkQueue.shared.addOperation(operation: postPostDepOperation)
+//      NetworkQueue.shared.addOperation(operation: getPostOperation)
     }
 
 
@@ -334,6 +260,8 @@ class NetworkTests: XCTestCase {
 
     if latency {
 
+      // Use network latency utility.
+
       NetworkQueue.shared.addOperation(operation: getPostOperation)
       NetworkQueue.shared.addOperation(operation: postPostOperation)
 
@@ -383,80 +311,5 @@ class NetworkTests: XCTestCase {
     displayWaiterResult(result: waiterResult)
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-  func testMultiple() {
-
-
-    /******************** Post operation ********************/
-
-    let getPostOperation = GetPostOperation(postId: 4)
-
-    getPostOperation.completionBlock = {
-      switch getPostOperation.result {
-      case .success(let data): print("Get compl Success: \(data.userId)");
-      case .failure(let error): print("Get compl Faillure \(error.localizedDescription)")
-      }
-    }
-
-    getPostOperation.success = { model in
-      print("Get Succed: \(model.userId)")
-    }
-    getPostOperation.failure = { error in
-      print("Get Failed: \(error.localizedDescription)")
-    }
-
-    /******************** Post operation ********************/
-
-    let postPostOperation =
-      PostPostOperation(userId: 13, title: "title", body: "body")
-
-
-    postPostOperation.completionBlock = {
-      switch postPostOperation.result {
-      case .success(let data): print("Post compl Success: \(data.userId)")
-      case .failure(let error): print("Post compl Faillure \(error.localizedDescription)")
-      }
-    }
-
-    postPostOperation.success = { model in
-      print("Post Succed: \(model.userId)")
-    }
-    postPostOperation.failure = { error in
-      print("Post Failed: \(error.localizedDescription)")
-    }
-
-    //--------------------------------------------------------------------------
-    // MARK: - Manually operation adding.
-    //--------------------------------------------------------------------------
-
-    // postPostOperation.addDependency(getPostOperation)
-
-    NetworkQueue.shared.addOperation(operation: getPostOperation)
-    NetworkQueue.shared.addOperation(operation: postPostOperation)
-
-    //--------------------------------------------------------------------------
-    // MARK: - Wait for all operations to complete.
-    //--------------------------------------------------------------------------
-
-    //    let operations = [getPostOperation, postPostOperation]
-    //    NetworkQueue.shared.addOperations(operations: operations,
-    //                                      waitUntilFinished: false)
-    // print("Done")
-
-    while true { }
-  }
-
- */
 
 }
