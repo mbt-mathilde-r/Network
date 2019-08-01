@@ -43,6 +43,18 @@ class NetworkTests: XCTestCase {
     }
   }
 
+  func testSimpleExpectaiton() {
+    let getPostOperation = GetPostOperation(postId: 1)
+    getPostOperation.success = { [weak self] _ in self?.expectation.fulfill() }
+    getPostOperation.failure = { error in XCTFail(error.localizedDescription) }
+
+    NetworkQueue.shared.addOperation(operation: getPostOperation)
+
+    let waiterResult =
+      XCTWaiter.wait(for: [expectation], timeout: timeout, enforceOrder: true)
+
+    displayWaiterResult(result: waiterResult)
+  }
 
 
 
@@ -58,7 +70,7 @@ class NetworkTests: XCTestCase {
 
 
   //----------------------------------------------------------------------------
-  // MARK: - Demo
+  // MARK: - Simple
   //----------------------------------------------------------------------------
 
   func testSimple() {
@@ -118,7 +130,9 @@ class NetworkTests: XCTestCase {
 
 
 
-
+  //----------------------------------------------------------------------------
+  // MARK: - Multiple
+  //----------------------------------------------------------------------------
 
   func testMultipleCall() {
 
@@ -294,31 +308,42 @@ class NetworkTests: XCTestCase {
 
 
 
+
+
+
+
+
+
+
+
   //----------------------------------------------------------------------------
-  // MARK: - Tests
+  // MARK: - Combined
   //----------------------------------------------------------------------------
-
-  func testSimpleExpectaiton() {
-    let getPostOperation = GetPostOperation(postId: 1)
-    getPostOperation.success = { [weak self] _ in self?.expectation.fulfill() }
-    getPostOperation.failure = { error in XCTFail(error.localizedDescription) }
-
-    NetworkQueue.shared.addOperation(operation: getPostOperation)
-
-    let waiterResult =
-      XCTWaiter.wait(for: [expectation], timeout: timeout, enforceOrder: true)
-
-    displayWaiterResult(result: waiterResult)
-  }
 
 
   func testCombined() {
-    let combinedOperation = CombinedOperation(postId: 13)
+    let combinedOperation = CombinedOperation()
     combinedOperation.completionBlock = { print("Combined completed") }
 
     NetworkQueue.shared.addOperation(operation: combinedOperation)
 
     while true { }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -13,8 +13,8 @@ final class CombinedOperation: AsynchronousBlockOperation {
   // MARK: - Initialization
   //----------------------------------------------------------------------------
 
-  init(postId: Int) {
-    getOperation = GetPostOperation(postId: postId)
+  override init() {
+    getOperation = GetPostOperation(postId: 13)
     postOperation = PostPostOperation(userId: 42, title: "Title", body: "body")
     super.init()
 
