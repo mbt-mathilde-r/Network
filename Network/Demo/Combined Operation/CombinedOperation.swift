@@ -15,7 +15,10 @@ final class CombinedOperation: AsynchronousBlockOperation {
 
   override init() {
     getOperation = GetPostOperation(postId: 13)
-    postOperation = PostPostOperation(userId: 42, title: "Title", body: "body")
+    postOperation = PostPostOperation(userId: 42,
+                                      title: "Title",
+                                      body: "body",
+                                      dependencies: [getOperation])
     super.init()
 
     getOperation.success = { model in print("Get completed") }
