@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2400847722CB3DC000C18CDC /* GetTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2400847622CB3DC000C18CDC /* GetTokenRequest.swift */; };
+		24674B1722F2BFC4002EE5EA /* CombinedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */; };
+		24674B1822F2C128002EE5EA /* CombinedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */; };
 		248668AD22C495B400425512 /* QueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668AC22C495B400425512 /* QueryType.swift */; };
 		248668AF22C4962C00425512 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668AE22C4962C00425512 /* HTTPMethod.swift */; };
 		248668B122C4994600425512 /* QueryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668B022C4994500425512 /* QueryBuilder.swift */; };
@@ -104,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		2400847622CB3DC000C18CDC /* GetTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenRequest.swift; sourceTree = "<group>"; };
+		24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedOperation.swift; sourceTree = "<group>"; };
 		248668AC22C495B400425512 /* QueryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryType.swift; sourceTree = "<group>"; };
 		248668AE22C4962C00425512 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		248668B022C4994500425512 /* QueryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryBuilder.swift; sourceTree = "<group>"; };
@@ -201,6 +204,14 @@
 			path = Authentification;
 			sourceTree = "<group>";
 		};
+		24674B1922F2C843002EE5EA /* Combined Operation */ = {
+			isa = PBXGroup;
+			children = (
+				24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */,
+			);
+			path = "Combined Operation";
+			sourceTree = "<group>";
+		};
 		249B780022C4111F007A0882 /* Network Operations */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,8 +289,7 @@
 				24A4148E22C23A3100CDEB4B /* Supporting Files */,
 				249B780822C41B7D007A0882 /* Extensions */,
 				4D51410722F1C776001676F8 /* Melomind */,
-				4D51410622F1C732001676F8 /* Custom */,
-				24BDC15422F23A6E002DC8A1 /* Batch upload */,
+				4D51410622F1C732001676F8 /* Demo */,
 				24A4147A22C23A2900CDEB4B /* Info.plist */,
 				24A4147022C23A2800CDEB4B /* ViewController.swift */,
 				4D853B5622CCD06100FE7CE8 /* Main.storyboard */,
@@ -353,14 +363,16 @@
 			path = Backend;
 			sourceTree = "<group>";
 		};
-		4D51410622F1C732001676F8 /* Custom */ = {
+		4D51410622F1C732001676F8 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				24BDC15422F23A6E002DC8A1 /* Batch upload */,
+				24674B1922F2C843002EE5EA /* Combined Operation */,
 				24D8B2B622C3D20200AC462B /* Model */,
 				2400847422CB3C8E00C18CDC /* Custom Operations */,
 				2400847322CB3C6A00C18CDC /* Custom Requests */,
 			);
-			path = Custom;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		4D51410722F1C776001676F8 /* Melomind */ = {
@@ -561,6 +573,7 @@
 				24C239D622CA458C002FF6CA /* PostPostRequest.swift in Sources */,
 				A90F49D622D381C900B124B6 /* QrCode.swift in Sources */,
 				24BDC15622F23A95002DC8A1 /* Batcher.swift in Sources */,
+				24674B1722F2BFC4002EE5EA /* CombinedOperation.swift in Sources */,
 				24C239D222CA24C4002FF6CA /* GetPostRequest.swift in Sources */,
 				4D4EBBEB22D49B9600199055 /* Session.swift in Sources */,
 				4DB44D0922D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift in Sources */,
@@ -584,6 +597,7 @@
 				24BDC16222F23D9F002DC8A1 /* ApiRequestProtocol.swift in Sources */,
 				24BDC16122F23D9B002DC8A1 /* NetworkError.swift in Sources */,
 				24BDC17222F23DBF002DC8A1 /* PostPostOperation.swift in Sources */,
+				24674B1822F2C128002EE5EA /* CombinedOperation.swift in Sources */,
 				24BDC16B22F23DA4002DC8A1 /* NetworkOperation.swift in Sources */,
 				24BDC16D22F23DB6002DC8A1 /* PostModel.swift in Sources */,
 				24BDC16822F23D9F002DC8A1 /* JsonEnvelopeDecoder.swift in Sources */,

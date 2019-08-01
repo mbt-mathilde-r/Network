@@ -312,4 +312,13 @@ class NetworkTests: XCTestCase {
   }
 
 
+  func testCombined() {
+    let combinedOperation = CombinedOperation(postId: 13)
+    combinedOperation.completionBlock = { print("Combined completed") }
+
+    NetworkQueue.shared.addOperation(operation: combinedOperation)
+
+    while true { }
+  }
+
 }
