@@ -11,28 +11,6 @@ import XCTest
 
 class ApiTokenProviderTests: XCTestCase {
 
-
-  //----------------------------------------------------------------------------
-  // MARK: - Properties
-  //----------------------------------------------------------------------------
-
-  let bearerText = "Bearer"
-
-  //----------------------------------------------------------------------------
-  // MARK: - Initialization
-  //----------------------------------------------------------------------------
-
-  override func setUp() {
-  }
-
-  override func tearDown() {
-  }
-
-
-  //----------------------------------------------------------------------------
-  // MARK: - Tests
-  //----------------------------------------------------------------------------
-
   private func setAndGetToken(_ token: String, for type: TokenType) -> String {
     ApiTokenProvider.shared.setToken(token, for: type)
     return ApiTokenProvider.shared.token(for: type)
@@ -44,6 +22,8 @@ class ApiTokenProviderTests: XCTestCase {
       "user": .user,
       "admin": .admin
     ]
+
+    let bearerText = "Bearer"
 
     for item in tokenToType {
       let expectedResults = "\(bearerText) \(item.key)"
