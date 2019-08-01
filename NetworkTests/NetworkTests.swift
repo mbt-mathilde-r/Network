@@ -153,10 +153,10 @@ class NetworkTests: XCTestCase {
 
     /******************** Settings ********************/
 
-    let manualAdding = false
+    let manualAdding = true
     let dependency = false
     let waitFor = false
-    let latency = true
+    let latency = false
 
     //--------------------------------------------------------------------------
     // MARK: - Manually operation adding.

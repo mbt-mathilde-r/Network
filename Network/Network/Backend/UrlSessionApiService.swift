@@ -1,7 +1,16 @@
 import Foundation
 
 /*******************************************************************************
- * UrlSessionApiService
+ *
+ var isSuccess: Bool {
+ get {
+ <#code#>
+ }
+ set {
+ <#code#>
+ }
+ }
+ UrlSessionApiService
  *
  * Use Request to feed an URLSession network service provider.
  *
@@ -20,9 +29,10 @@ class UrlSessionApiService: ApiServiceProtocol {
   // MARK: - Initialization
   //----------------------------------------------------------------------------
 
-  init(configuration: ApiServerConfiguration = ApiServerConfiguration.shared) {
+  init(configuration: ApiServerConfiguration = ApiServerConfiguration.shared,
+       service: NetworkServiceProviderProtocol = NetworkServiceProvider()) {
     self.configuration = configuration
-    service = NetworkServiceProvider()
+    self.service = service
   }
 
   //----------------------------------------------------------------------------
@@ -68,15 +78,21 @@ class UrlSessionApiService: ApiServiceProtocol {
 
 
 
-//protocol UrlSessionApiServiceTestable {
-//    init(mockedService: NetworkServiceProviderProtocol)
-//}
-//
-//extension UrlSessionApiServiceTestable where Self: UrlSessionApiService {
-//
-//    init(mockedService: NetworkServiceProviderProtocol)   {
-//        self.configuration = configuration
-//        service = mockedService
-//    }
-//
-//}
+protocol UrlSessionApiServiceTestable {
+
+  func setupForMock(completion: @escaping ((Bool) -> Void))
+}
+
+extension UrlSessionApiServiceTestable where Self: UrlSessionApiService {
+
+  func setupForMock(completion: @escaping ((Bool) -> Void)) {
+    let dumbRequest = GetPostRequest(postId: 1)
+    setup(with: dumbRequest) { result in
+      switch result {
+      case .success(_): completion(true)
+      case .failure(_): completion(false)
+      }
+    }
+  }
+
+}
