@@ -5,10 +5,11 @@ import Foundation
  * NetworkQueue
  *
  * A queue that regulates the execution of network operations.
+ * TODO: Force only network operation to be added?
  *
  ******************************************************************************/
 
-class NetworkQueue {
+final class NetworkQueue {
 
   //----------------------------------------------------------------------------
   // MARK: - Properties
