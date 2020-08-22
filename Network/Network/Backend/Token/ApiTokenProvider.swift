@@ -7,6 +7,15 @@ import Foundation
 //let token = ""
 //urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
+
+/*******************************************************************************
+ * ApiTokenProvider
+ *
+ * Provider for several token.
+ * /!\ Not used in this project.
+ *
+ ******************************************************************************/
+
 final class ApiTokenProvider {
 
   //----------------------------------------------------------------------------
@@ -47,12 +56,12 @@ final class ApiTokenProvider {
   //----------------------------------------------------------------------------
 
   func setToken(token: String) {
-    fatalError("To be implemented.")
+    fatalError("To be implemented. Use a database pattern.")
     //userDefaults.setValue(token, forKey: key)
   }
 
   func deleteToken() {
-    fatalError("To be implemented.")
+    fatalError("To be implemented. Use a database pattern.")
     //userDefaults.removeObject(forKey: key)
   }
 
@@ -62,18 +71,19 @@ final class ApiTokenProvider {
 
   func setToken(_ token: String, for type: TokenType) {
     switch type {
-    case .none: return
-    case .admin: adminToken = token
-    case .user: userToken = token
+      case .admin: adminToken = token
+      case .user: userToken = token
+      case .none, .custom(_): return
     }
   }
 
   func token(for type: TokenType) -> String {
-    var token = "Bearer "
+    var token = "Bearer" + " "
     switch type {
-    case .none: token += noneToken
-    case .admin: token += adminToken
-    case .user: token += userToken
+      case .none: token += noneToken
+      case .admin: token += adminToken
+      case .user: token += userToken
+      case .custom(let tokenValue): token += tokenValue
     }
 
     return token

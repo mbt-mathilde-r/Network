@@ -10,6 +10,7 @@
 		2400847722CB3DC000C18CDC /* GetTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2400847622CB3DC000C18CDC /* GetTokenRequest.swift */; };
 		2445DF8924F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */; };
 		2445DF8A24F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */; };
+		2445DF8C24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8B24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift */; };
 		24674B1722F2BFC4002EE5EA /* CombinedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */; };
 		24674B1822F2C128002EE5EA /* CombinedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */; };
 		248668AD22C495B400425512 /* QueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668AC22C495B400425512 /* QueryType.swift */; };
@@ -86,7 +87,6 @@
 		4D853B5722CCD06200FE7CE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D853B5622CCD06100FE7CE8 /* Main.storyboard */; };
 		4DB44D0722D5EBD500C6ED78 /* ApiTokenProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */; };
 		4DB44D0922D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB44D0822D5F3AC00C6ED78 /* JsonEnvelopeDecoder.swift */; };
-		4DD58FD922F2E15800A54DC0 /* MockServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD58FD822F2E15800A54DC0 /* MockServiceProvider.swift */; };
 		4DD58FDA22F2E3B400A54DC0 /* MockServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD58FD822F2E15800A54DC0 /* MockServiceProvider.swift */; };
 		4DD58FDC22F2E44900A54DC0 /* UrlSessionApiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD58FDB22F2E44900A54DC0 /* UrlSessionApiServiceTests.swift */; };
 		A90F49D422D37E4A00B124B6 /* GetQrCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D322D37E4A00B124B6 /* GetQrCodeRequest.swift */; };
@@ -112,6 +112,7 @@
 /* Begin PBXFileReference section */
 		2400847622CB3DC000C18CDC /* GetTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenRequest.swift; sourceTree = "<group>"; };
 		2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProviderProtocol.swift; sourceTree = "<group>"; };
+		2445DF8B24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionApiServiceTestable.swift; sourceTree = "<group>"; };
 		24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedOperation.swift; sourceTree = "<group>"; };
 		248668AC22C495B400425512 /* QueryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryType.swift; sourceTree = "<group>"; };
 		248668AE22C4962C00425512 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -240,7 +241,6 @@
 				24D8B2B422C3B61100AC462B /* UrlSessionApiService.swift */,
 				4D853B5322CCAE8500FE7CE8 /* Token */,
 				24D8B2AA22C3900100AC462B /* ApiServerConfiguration.swift */,
-				4DD58FD822F2E15800A54DC0 /* MockServiceProvider.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -367,8 +367,10 @@
 		4D4EBBEC22D4CD9800199055 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				4DD58FD822F2E15800A54DC0 /* MockServiceProvider.swift */,
 				4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */,
 				4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */,
+				2445DF8B24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift */,
 				4DD58FDB22F2E44900A54DC0 /* UrlSessionApiServiceTests.swift */,
 			);
 			path = Backend;
@@ -557,7 +559,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D4EBBEA22D49B9600199055 /* GetSessionsHistoryOperation.swift in Sources */,
-				4DD58FD922F2E15800A54DC0 /* MockServiceProvider.swift in Sources */,
 				A90F49DC22D3939E00B124B6 /* Config.swift in Sources */,
 				248668B122C4994600425512 /* QueryBuilder.swift in Sources */,
 				24D8B2BA22C3DFC800AC462B /* RequestProtocol.swift in Sources */,
@@ -627,6 +628,7 @@
 				24BDC16022F23D97002DC8A1 /* ApiServerConfiguration.swift in Sources */,
 				24BDC17B22F23DE3002DC8A1 /* Config.swift in Sources */,
 				24BDC15C22F23D8B002DC8A1 /* ApiServiceProtocol.swift in Sources */,
+				2445DF8C24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift in Sources */,
 				24BDC15722F23CF6002DC8A1 /* Batcher.swift in Sources */,
 				24BDC17622F23DD4002DC8A1 /* MeloRequestModel.swift in Sources */,
 				4D4EBBEE22D4CDC600199055 /* ApiServerConfigurationTests.swift in Sources */,
