@@ -15,335 +15,269 @@ class NetworkTests: XCTestCase {
   // MARK: - Properties
   //----------------------------------------------------------------------------
 
-  var expectation = XCTestExpectation(description: "Api call.")
+  /******************** Test expectation ********************/
+
   let timeout: TimeInterval = 10
+
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization
   //----------------------------------------------------------------------------
 
+  var queue = OperationQueue()
+
   override func setUp() {
+    queue = OperationQueue()
+    queue.maxConcurrentOperationCount = 1
   }
 
   override func tearDown() {
+    NetworkQueue.shared.cancelAllOperations()
   }
 
+
   //----------------------------------------------------------------------------
-  // MARK: - Utilities
+  // MARK: - Waiter
   //----------------------------------------------------------------------------
 
   private func displayWaiterResult(result: XCTWaiter.Result) {
     switch result {
-    case .completed: print("Everything is fullfiled.")
-    case .incorrectOrder: print("Unexpected order.")
-    case .interrupted: print("Waiter has been interrupted.")
-    case .invertedFulfillment: print("Inverted expectaction is fullfiled.")
-    case .timedOut: print("Everything did not fullfill.")
-    default: print("Not handled case.")
+      case .completed: print("Everything is fullfiled.")
+      case .incorrectOrder: print("Unexpected order.")
+      case .interrupted: print("Waiter has been interrupted.")
+      case .invertedFulfillment: print("Inverted expectaction is fullfiled.")
+      case .timedOut: print("Everything did not fullfill.")
+      default: print("Not handled case.")
     }
   }
 
-  func testSimpleExpectaiton() {
-    let getPostOperation = GetPostOperation(postId: 1)
-    getPostOperation.success = { [weak self] _ in self?.expectation.fulfill() }
-    getPostOperation.failure = { error in XCTFail(error.localizedDescription) }
-
-    NetworkQueue.shared.addOperation(operation: getPostOperation)
-
+  private func wait(for expectations: [XCTestExpectation]) -> XCTWaiter.Result {
     let waiterResult =
-      XCTWaiter.wait(for: [expectation], timeout: timeout, enforceOrder: true)
-
+      XCTWaiter.wait(for: expectations, timeout: timeout, enforceOrder: true)
     displayWaiterResult(result: waiterResult)
+    return waiterResult
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
+  private func wait(for expectation: XCTestExpectation) -> XCTWaiter.Result {
+    return wait(for: [expectation])
+  }
 
   //----------------------------------------------------------------------------
   // MARK: - Simple
   //----------------------------------------------------------------------------
 
-  func testSimple() {
-    let getPostOperation = GetPostOperation(postId: 1)
-    getPostOperation.success = { model in print("Success: \(model.userId)") }
-    getPostOperation.failure = { error in print("\(error)") }
+  func testIntegrationSimpleOperation() {
+    let getExpectation =
+      XCTestExpectation(description: "getPostOperation expectation")
 
-    NetworkQueue.shared.addOperation(operation: getPostOperation)
+    let getPostOperation = GetPostOperation(postId: 13)
 
-    while true { }
+    getPostOperation.completionBlock = {
+      switch getPostOperation.result {
+        case .success(_): getExpectation.fulfill()
+        case .failure(_): return
+      }
+    }
+
+//    getPostOperation.didSucceed = { model in
+//      print("Get Succed: \(model.userId)")
+//      getExpectation.fulfill()
+//    }
+
+//    getPostOperation.didFail = { error in XCTFail(error.localizedDescription) }
+
+    queue.addOperation(getPostOperation)
+    let expectationsResult = wait(for: getExpectation)
+    XCTAssert(expectationsResult == .completed, "Error with expectations")
   }
 
+  func testIntegrationMultipleOperation() {
+    var expectations = [XCTestExpectation]()
+
+    let getExpectation =
+      XCTestExpectation(description: "getPostOperation expectation")
+
+    let getPostOperation = GetPostOperation(postId: 13)
+    getPostOperation.completionBlock = {
+      switch getPostOperation.result {
+        case .success(_): getExpectation.fulfill()
+        case .failure(_): return
+      }
+    }
+
+//    getPostOperation.didSucceed = { model in
+//      print("Get Succed: \(model.userId)")
+//      getExpectation.fulfill()
+//    }
+
+//    getPostOperation.didFail = { error in XCTFail(error.localizedDescription) }
+    expectations.append(getExpectation)
 
 
 
+    let postExpectation =
+      XCTestExpectation(description: "postPostOperation expectation")
+    let postPostOperation = PostPostOperation(userId: 42,
+                                              title: "title",
+                                              body: "body")
 
+    postPostOperation.completionBlock = {
+      switch postPostOperation.result {
+        case .success(_): postExpectation.fulfill()
+        case .failure(_): return
+      }
+    }
 
+//    postPostOperation.didSucceed = { model in
+//      print("Post Succed: \(model.userId)")
+//      postExpectation.fulfill()
+//    }
 
+//    postPostOperation.didFail = { error in XCTFail(error.localizedDescription) }
+    expectations.append(postExpectation)
 
+    queue.addOperations([getPostOperation, postPostOperation], waitUntilFinished: true)
 
-
-
-
-
-
-
-
-
-
-  //----------------------------------------------------------------------------
-  // MARK: - Batch
-  //----------------------------------------------------------------------------
-
-  func testBatch() {
-    let batcher = Batcher()
-
-    batcher.addData(title: "One")
-    sleep(2)
-    batcher.addData(title: "Two")
-    sleep(2)
-    batcher.addData(title: "Three")
-
-    while true { }
+    let expectationsResult = wait(for: expectations)
+    XCTAssert(expectationsResult == .completed, "Error with expectations")
   }
 
+  func testIntegrationDependency() {
+    var expectations = [XCTestExpectation]()
+
+    let getExpectation =
+      XCTestExpectation(description: "getPostDepOperation expectation")
+
+    let getPostOperation = GetPostOperation(postId: 13)
+    getPostOperation.completionBlock = {
+      switch getPostOperation.result {
+        case .success(_): getExpectation.fulfill()
+        case .failure(_): return
+      }
+    }
+//    getPostOperation.didSucceed = { model in
+//      print("Get Succed: \(model.userId)")
+//      getExpectation.fulfill()
+//    }
+////    getPostOperation.didFail =
+////      { error in XCTFail(error.localizedDescription) }
+
+    expectations.append(getExpectation)
+
+    let postDepExpectation =
+      XCTestExpectation(description: "postPostOperation expectation")
+
+    let postPostDepOperation =
+      PostPostOperation(userId: 13,
+                        title: "title",
+                        body: "body",
+                        dependencies: [getPostOperation])
+    postPostDepOperation.completionBlock = {
+      switch postPostDepOperation.result {
+        case .success(_): postDepExpectation.fulfill()
+        case .failure(_): return
+      }
+    }
+
+//    postPostDepOperation.didSucceed = { model in
+//      print("Post 2 Succed: \(model.userId)")
+//      postDepExpectation.fulfill()
+//    }
+
+//    postPostDepOperation.didFail =
+//      { error in XCTFail(error.localizedDescription) }
+
+    expectations.append(postDepExpectation)
 
 
+    queue.addOperation(postPostDepOperation)
+    queue.addOperation(getPostOperation)
+
+    let expectationsResult = wait(for: expectations)
+    XCTAssert(expectationsResult == .completed, "Error with expectations")
+  }
+
+  func testIntegrationCancellation() {
+    var expectations = [XCTestExpectation]()
+
+    let getExpectation =
+      XCTestExpectation(description: "getPostOperation expectation")
+    let getPostOperation = GetPostOperation(postId: 13)
+    getPostOperation.completionBlock = {
+      switch getPostOperation.result {
+        case .success(_): return
+        case .failure(_): getExpectation.fulfill()
+      }
+    }
+////    getPostOperation.didSucceed = { _ in XCTFail("Should not complete.") }
+//    getPostOperation.didFail = { error in getExpectation.fulfill() }
+    expectations.append(getExpectation)
 
 
-
-
-
-
-
-
-
-
-
-
-  //----------------------------------------------------------------------------
-  // MARK: - Multiple
-  //----------------------------------------------------------------------------
-
-  func testMultipleCall() {
-
-    /******************** Get operation ********************/
-
-    let getPostOperation = GetPostOperation(postId: 4)
-
-    getPostOperation.success = { model in print("Get Succed: \(model.userId)") }
-    getPostOperation.failure = { error in print("Get Failed: \(error)") }
-
-    /******************** Post operation ********************/
-
+    let postExpectation =
+      XCTestExpectation(description: "postPostOperation expectation")
     let postPostOperation =
-      PostPostOperation(userId: 13, title: "title", body: "body")
-
-    postPostOperation.success = { model in print("Post Succed: \(model.userId)") }
-    postPostOperation.failure = { error in print("Post Failed: \(error)") }
-
-    /******************** Settings ********************/
-
-    let manualAdding = true
-    let dependency = false
-    let waitFor = false
-    let latency = false
-
-    //--------------------------------------------------------------------------
-    // MARK: - Manually operation adding.
-    //--------------------------------------------------------------------------
-
-
-    if manualAdding {
-      NetworkQueue.shared.addOperation(operation: getPostOperation)
-      NetworkQueue.shared.addOperation(operation: postPostOperation)
+      PostPostOperation(userId: 42, title: "title", body: "body")
+    postPostOperation.completionBlock = {
+      switch postPostOperation.result {
+        case .success(_): return
+        case .failure(_): postExpectation.fulfill()
+      }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //--------------------------------------------------------------------------
-    // MARK: - Manually operation adding with dependency.
-    //--------------------------------------------------------------------------
-
-    if dependency {
-      let postPostDepOperation =
-        PostPostOperation(userId: 13,
-                          title: "title",
-                          body: "body",
-                          dependencies: [getPostOperation])
-
-      postPostDepOperation.success =
-        { model in print("Post 2 Succed: \(model.userId)") }
-      postPostDepOperation.failure =
-        { error in print("Post 2 Failed: \(error.localizedDescription)") }
-
-      NetworkQueue.shared.addOperation(operation: getPostOperation)
-      NetworkQueue.shared.addOperation(operation: postPostDepOperation)
-
-//      NetworkQueue.shared.addOperation(operation: postPostDepOperation)
-//      NetworkQueue.shared.addOperation(operation: getPostOperation)
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //--------------------------------------------------------------------------
-    // MARK: - Wait for all operations to complete.
-    //--------------------------------------------------------------------------
-
-    if waitFor {
-      let operations = [getPostOperation, postPostOperation]
-      NetworkQueue.shared.addOperations(operations: operations,
-                                        waitUntilFinished: true)
-      print("Done")
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //--------------------------------------------------------------------------
-    // MARK: - Latency
-    //--------------------------------------------------------------------------
-
-    if latency {
-
-      // Use network latency utility.
-
-      NetworkQueue.shared.addOperation(operation: getPostOperation)
-      NetworkQueue.shared.addOperation(operation: postPostOperation)
-
-      sleep(1)
-      NetworkQueue.shared.cancelAllOperations()
-
-    }
-
-    while true { }
-
+//    postPostOperation.didSucceed = {  _ in XCTFail("Should not complete.") }
+//    postPostOperation.didFail = { error in postExpectation.fulfill() }
+    expectations.append(postExpectation)
+
+    queue.addOperation(getPostOperation)
+    queue.addOperation(postPostOperation)
+    queue.cancelAllOperations()
+
+    let expectationsResult = wait(for: expectations)
+    XCTAssert(expectationsResult == .completed, "Error with expectations")
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   //----------------------------------------------------------------------------
   // MARK: - Combined
   //----------------------------------------------------------------------------
 
+  func testIntegrationCombined() {
+    let expectation =
+      XCTestExpectation(description: "CombinedOperation expectation")
 
-  func testCombined() {
     let combinedOperation = CombinedOperation()
-    combinedOperation.completionBlock = { print("Combined completed") }
+    combinedOperation.didSucceed = { result in expectation.fulfill() }
 
-    NetworkQueue.shared.addOperation(operation: combinedOperation)
+    queue.addOperation(combinedOperation)
 
-    while true { }
+    let expectationsResult = wait(for: expectation)
+    XCTAssert(expectationsResult == .completed, "Error with expectations")
   }
 
+  //----------------------------------------------------------------------------
+  // MARK: - Batch
+  //----------------------------------------------------------------------------
 
+  func testIntegrationBatch() {
+    let batcher = Batcher()
 
+    let batchTitles = ["One", "Two", "Three"]
+    var expectations = [XCTestExpectation]()
 
+    for batchTitle in batchTitles {
+      let expectation = XCTestExpectation(description: batchTitle)
+      expectations.append(expectation)
+    }
 
+    XCTAssert(expectations.count == batchTitles.count, "")
+    for (index, batchTitle) in batchTitles.enumerated() {
+      let expectation = expectations[index]
+      batcher.addData(title: batchTitle) {
+        expectation.fulfill()
+      }
+    }
 
-
-
-
-
-
-
-
-
-
-
+    let expectationsResult = wait(for: expectations)
+    XCTAssert(expectationsResult == .completed, "Error with expectations")
+  }
 
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2400847722CB3DC000C18CDC /* GetTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2400847622CB3DC000C18CDC /* GetTokenRequest.swift */; };
 		2445DF8924F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */; };
 		2445DF8A24F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */; };
 		2445DF8C24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8B24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift */; };
@@ -51,7 +50,6 @@
 		24BDC16D22F23DB6002DC8A1 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239CF22CA2470002FF6CA /* PostModel.swift */; };
 		24BDC17122F23DBF002DC8A1 /* GetPostOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239D322CA2FCA002FF6CA /* GetPostOperation.swift */; };
 		24BDC17222F23DBF002DC8A1 /* PostPostOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239D722CA461D002FF6CA /* PostPostOperation.swift */; };
-		24BDC17322F23DBF002DC8A1 /* GetTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2400847622CB3DC000C18CDC /* GetTokenRequest.swift */; };
 		24BDC17422F23DBF002DC8A1 /* GetPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239D122CA24C4002FF6CA /* GetPostRequest.swift */; };
 		24BDC17522F23DBF002DC8A1 /* PostPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239D522CA458C002FF6CA /* PostPostRequest.swift */; };
 		24BDC17622F23DD4002DC8A1 /* MeloRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D922D38FA500B124B6 /* MeloRequestModel.swift */; };
@@ -110,7 +108,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2400847622CB3DC000C18CDC /* GetTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenRequest.swift; sourceTree = "<group>"; };
 		2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProviderProtocol.swift; sourceTree = "<group>"; };
 		2445DF8B24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionApiServiceTestable.swift; sourceTree = "<group>"; };
 		24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedOperation.swift; sourceTree = "<group>"; };
@@ -189,7 +186,6 @@
 		2400847322CB3C6A00C18CDC /* Custom Requests */ = {
 			isa = PBXGroup;
 			children = (
-				2400847522CB3DA900C18CDC /* Authentification */,
 				24C239D122CA24C4002FF6CA /* GetPostRequest.swift */,
 				24C239D522CA458C002FF6CA /* PostPostRequest.swift */,
 			);
@@ -203,14 +199,6 @@
 				24C239D722CA461D002FF6CA /* PostPostOperation.swift */,
 			);
 			path = "Custom Operations";
-			sourceTree = "<group>";
-		};
-		2400847522CB3DA900C18CDC /* Authentification */ = {
-			isa = PBXGroup;
-			children = (
-				2400847622CB3DC000C18CDC /* GetTokenRequest.swift */,
-			);
-			path = Authentification;
 			sourceTree = "<group>";
 		};
 		24674B1922F2C843002EE5EA /* Combined Operation */ = {
@@ -582,7 +570,6 @@
 				4D4EBBE922D49B9600199055 /* SessionHistory.swift in Sources */,
 				24A4147122C23A2800CDEB4B /* ViewController.swift in Sources */,
 				249B780A22C41B8F007A0882 /* EncodableExtension.swift in Sources */,
-				2400847722CB3DC000C18CDC /* GetTokenRequest.swift in Sources */,
 				24A4149122C23A5D00CDEB4B /* NetworkServiceProvider.swift in Sources */,
 				24C239D622CA458C002FF6CA /* PostPostRequest.swift in Sources */,
 				A90F49D622D381C900B124B6 /* QrCode.swift in Sources */,
@@ -607,7 +594,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DD58FDC22F2E44900A54DC0 /* UrlSessionApiServiceTests.swift in Sources */,
-				24BDC17322F23DBF002DC8A1 /* GetTokenRequest.swift in Sources */,
 				24BDC16622F23D9F002DC8A1 /* HTTPMethod.swift in Sources */,
 				24BDC16222F23D9F002DC8A1 /* ApiRequestProtocol.swift in Sources */,
 				24BDC16122F23D9B002DC8A1 /* NetworkError.swift in Sources */,

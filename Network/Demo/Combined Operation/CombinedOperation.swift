@@ -1,13 +1,37 @@
 import Foundation
 
+/*******************************************************************************
+ * CombinedOperation
+ *
+ * Example to demonstrate how to combine multiple operations.
+ *
+ ******************************************************************************/
+
 final class CombinedOperation: AsynchronousBlockOperation {
 
   //----------------------------------------------------------------------------
   // MARK: - Properties
   //----------------------------------------------------------------------------
 
+  /******************** Operations ********************/
+
   var getOperation: GetPostOperation
   var postOperation: PostPostOperation
+
+  /******************** Result ********************/
+
+  /// Dumb data to demonstrate how to transfert result between operations.
+  var userId: Int?
+
+  /******************** Callbacks ********************/
+
+  /// Closure called when a operation succefully finished.
+  /// Called in background thread.
+  var didSucceed: ((Int) -> Void)?
+
+  /// Closure called when a operation unsuccefully finished.
+  /// Called in background thread.
+  var didFail: ((Error) -> Void)?
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization
@@ -20,12 +44,40 @@ final class CombinedOperation: AsynchronousBlockOperation {
                                       body: "body",
                                       dependencies: [getOperation])
     super.init()
+    setup()
+  }
 
-    getOperation.success = { model in print("Get completed") }
+  private func setup() {
+    setupGetOperation()
+    setupPostOperation()
+  }
 
-    postOperation.success = { [weak self] model in
-      print("Post completed")
+  private func setupGetOperation() {
+    getOperation.didSucceed =
+      { [weak self] model in self?.userId = model.userId }
+
+    getOperation.didFail = { [weak self] error in
       self?.finish()
+      self?.didFail?(error)
+    }
+  }
+
+  private func setupPostOperation() {
+    postOperation.didSucceed = { [weak self] model in
+      self?.finish()
+
+      guard let userId = self?.userId else {
+        let error = NSError(domain: "Combined", code: 1)
+        self?.didFail?(error)
+        return
+      }
+
+      self?.didSucceed?(userId)
+    }
+
+    postOperation.didFail = { [weak self] error in
+      self?.finish()
+      self?.didFail?(error)
     }
   }
 

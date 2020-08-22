@@ -36,11 +36,14 @@ class NetworkOperation<
 
   /// Closure called when a operation succefully finished.
   /// Called in background thread.
-  var success: ((ResultSuccessType) -> Void)?
+  var didSucceed: ((ResultSuccessType) -> Void)?
 
   /// Closure called when a operation unsuccefully finished.
   /// Called in background thread.
-  var failure: ((Error) -> Void)?
+  var didFail: ((Error) -> Void)?
+
+  /// Completion block called in main thread. Sugar syntax for UI completion.
+  var completionBlockInMainThread: ((ResultType) -> Void)?
 
   private(set) var result: ResultType
     = ResultType.failure(NetworkError.invalidResult) {
@@ -48,8 +51,8 @@ class NetworkOperation<
 
       // Callback in background completionBlock.
       switch result {
-        case .success(let data): success?(data)
-        case .failure(let error): failure?(error)
+        case .success(let data): didSucceed?(data)
+        case .failure(let error): didFail?(error)
       }
 
       DispatchQueue.main.async { [weak self] in
@@ -60,9 +63,6 @@ class NetworkOperation<
       finish()
     }
   }
-
-  /// Completion block called in main thread. Sugar syntax for UI completion.
-  var completionBlockInMainThread: ((ResultType) -> Void)?
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization
