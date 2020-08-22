@@ -1,5 +1,13 @@
 import Foundation
 
+
+/*******************************************************************************
+ * NetworkQueue
+ *
+ * A queue that regulates the execution of network operations.
+ *
+ ******************************************************************************/
+
 class NetworkQueue {
 
   //----------------------------------------------------------------------------
@@ -8,7 +16,9 @@ class NetworkQueue {
 
   /******************** Queue ********************/
 
-  let queue = OperationQueue()
+
+  /// A queue that regulates the execution of operations.
+  private let queue = OperationQueue()
 
   /******************** Singleton ********************/
 
@@ -30,10 +40,18 @@ class NetworkQueue {
   // MARK: - Queue adding
   //----------------------------------------------------------------------------
 
+  /// Adds the specified operation.
+  /// - Parameter operation: The operation to be added to the queue.
   func addOperation(operation: Operation) {
     queue.addOperation(operation)
   }
 
+  /// Adds the specified operations to the queue.
+  /// - Parameters:
+  ///   - operations: The operations to be added to the queue.
+  ///   - waitUntilFinished: If true, the current thread is blocked until all
+  ///   of the specified operations finish executing. If false, the operations
+  ///   are added to the queue and control returns immediately to the caller.
   func addOperations(operations: [Operation], waitUntilFinished: Bool = false) {
     queue.addOperations(operations, waitUntilFinished: waitUntilFinished)
   }
@@ -42,10 +60,13 @@ class NetworkQueue {
   // MARK: - Queue life cycle
   //----------------------------------------------------------------------------
 
+  /// Blocks the current thread until all of the receiver’s queued and executing
+  /// operations finish executing.
   func waitUntilAllOperationsAreFinished() {
     queue.waitUntilAllOperationsAreFinished()
   }
 
+  /// Cancels all queued and executing operations.
   func cancelAllOperations() {
     queue.cancelAllOperations()
   }
