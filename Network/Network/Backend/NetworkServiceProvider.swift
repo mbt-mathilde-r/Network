@@ -1,12 +1,5 @@
 import Foundation
 
-protocol NetworkServiceProviderProtocol {
-    func setup(urlRequest: URLRequest,
-               completion: @escaping ((Result<Data, Error>) -> Void))
-    func start()
-    func cancel()
-}
-
 /*******************************************************************************
  * NetworkServiceProvider
  *
@@ -16,20 +9,23 @@ protocol NetworkServiceProviderProtocol {
  *
  ******************************************************************************/
 
-class NetworkServiceProvider: NSObject, NetworkServiceProviderProtocol {
+final class NetworkServiceProvider: NSObject, NetworkServiceProviderProtocol {
+
+  //----------------------------------------------------------------------------
+  // MARK: - Typealias
+  //----------------------------------------------------------------------------
+
+  private typealias DataTaskResult =
+    (data: Data?, response: URLResponse?, error: Error?)
 
   //----------------------------------------------------------------------------
   // MARK: - Properties
   //----------------------------------------------------------------------------
 
-  /******************** Typealias ********************/
-
-  private typealias DataTaskResult =
-    (data: Data?, response: URLResponse?, error: Error?)
-
   /******************** URLSession ********************/
 
   private var task: URLSessionDataTask?
+
   private var timeoutInterval: TimeInterval = 10.0
 
   //----------------------------------------------------------------------------
@@ -43,8 +39,8 @@ class NetworkServiceProvider: NSObject, NetworkServiceProviderProtocol {
       defer { self.task = nil }
       //print("\(urlRequest.url?.absoluteString ?? "wrong url") task completed.")
       switch self.isValid(dataTaskResult: (data, response, error)) {
-      case .failure(let failureError): completion(.failure(failureError))
-      case .success(let valideData): completion(.success(valideData))
+        case .failure(let failureError): completion(.failure(failureError))
+        case .success(let valideData): completion(.success(valideData))
       }
     }
   }
@@ -64,11 +60,17 @@ class NetworkServiceProvider: NSObject, NetworkServiceProviderProtocol {
   // MARK: - Validity
   //----------------------------------------------------------------------------
 
+  /// Check if a given http response is valid or not.
+  /// - Parameter response: A http response to check.
+  /// - Returns: True if valide, false otherwise.
   private func isValidResponse(response: HTTPURLResponse) -> Bool {
     let isValidResponse = 200...299 ~= response.statusCode
     return isValidResponse
   }
 
+  /// Check if a task result is valid or not.
+  /// - Parameter dataTaskResult: A task resul to check.
+  /// - Returns: True if valide, false otherwise.
   private func isValid(dataTaskResult: DataTaskResult) -> Result<Data, Error> {
     if let error = dataTaskResult.error { return .failure(error) }
 

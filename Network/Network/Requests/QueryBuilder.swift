@@ -1,8 +1,19 @@
 import Foundation
 
-// https://cocoacasts.com/working-with-nsurlcomponents-in-swift
-class QueryBuilder {
+/*******************************************************************************
+ * QueryBuilder
+ *
+ * Build a query from differents parameters.
+ *
+ * https://cocoacasts.com/working-with-nsurlcomponents-in-swift
+ *
+ ******************************************************************************/
 
+final class QueryBuilder {
+
+  /// Build a query from given parameters.
+  /// - Parameter parameters: Parameters to use for the query.
+  /// - Returns: A string representation of the built query.
   static func build(from parameters: [String: Any]?) -> String? {
     guard let parameters = parameters else { return nil }
 

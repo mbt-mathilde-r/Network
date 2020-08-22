@@ -7,6 +7,7 @@ import Foundation
  * A network operation used
  * ResultSuccessType is the type of data expected as result.
  * EnvelopeDataItemType is the type of the enveloppe of the expected data.
+ * /!\ Enveloppes are not used in this project.
  * RequestType is the type of the request that will be made to receive the data.
  *
  ******************************************************************************/

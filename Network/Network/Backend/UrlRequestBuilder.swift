@@ -8,7 +8,7 @@ import Foundation
  *
  ******************************************************************************/
 
-class UrlRequestBuilder {
+final class UrlRequestBuilder {
 
   //----------------------------------------------------------------------------
   // MARK: - Builder
@@ -19,15 +19,16 @@ class UrlRequestBuilder {
                               timeoutInterval: TimeInterval) -> URLRequest? {
     guard let url =
       UrlRequestBuilder.generateUrl(from: request,
-                                    apiConfiguration: apiConfiguration) else {
+                                    apiConfiguration: apiConfiguration)
+      else {
+        // TODO: Create error
         print("Error while generating url")
         return nil
     }
 
-    var urlRequest =
-      URLRequest(url: url,
+    var urlRequest = URLRequest(url: url,
                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, // ToCheck
-        timeoutInterval: timeoutInterval)
+                 timeoutInterval: timeoutInterval)
 
     // let headers = request.headers
     // Set authentication token if available.
@@ -40,14 +41,17 @@ class UrlRequestBuilder {
     return urlRequest
   }
 
+  /// Generate the full url of a given request for a specific configuration.
+  /// - Parameters:
+  ///   - request: The request to use.
+  ///   - apiConfiguration: The related request configuration.
+  /// - Returns: A generated request url.
   private static func generateUrl(
     from request: ApiRequestProtocol,
     apiConfiguration: ApiServerConfiguration
-    ) -> URL? {
+  ) -> URL? {
     var urlComponent = apiConfiguration.baseURL
-
-    // apiConfiguration.version + request.endpoint
-    urlComponent.path = request.endpoint
+    urlComponent.path = request.endpoint // apiConfiguration.version + request.endpoint
     urlComponent.percentEncodedQuery = request.query
 
     guard let url = urlComponent.url else {

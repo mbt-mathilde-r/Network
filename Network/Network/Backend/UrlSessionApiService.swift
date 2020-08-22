@@ -1,16 +1,7 @@
 import Foundation
 
 /*******************************************************************************
- *
- var isSuccess: Bool {
- get {
- <#code#>
- }
- set {
- <#code#>
- }
- }
- UrlSessionApiService
+ * UrlSessionApiService
  *
  * Use Request to feed an URLSession network service provider.
  *
@@ -41,7 +32,6 @@ class UrlSessionApiService: ApiServiceProtocol {
 
   func setup(with request: ApiRequestProtocol,
              completion: @escaping ((Result<Data, Error>) -> Void)) {
-
     guard let urlRequest =
       UrlRequestBuilder.buildUrlRequest(from: request,
                                         apiConfiguration: configuration,
@@ -53,8 +43,8 @@ class UrlSessionApiService: ApiServiceProtocol {
 
     service.setup(urlRequest: urlRequest) { result in
       switch result {
-      case .success(let data): completion(.success(data))
-      case .failure(let error): completion(.failure(error))
+        case .success(let data): completion(.success(data))
+        case .failure(let error): completion(.failure(error))
       }
     }
   }

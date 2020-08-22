@@ -1,5 +1,12 @@
 import Foundation
 
+/*******************************************************************************
+ * JsonEnvelopeDecoder
+ *
+ * A JSON decoder where data are encapsulated into an enveloppe.
+ *
+ ******************************************************************************/
+
 final class JsonEnvelopeDecoder<ResultType, EnvelopeDataItemType: Codable> {
 
   /// Tell if the `ResultType` is an array of `EnvelopeDataItemType` or an

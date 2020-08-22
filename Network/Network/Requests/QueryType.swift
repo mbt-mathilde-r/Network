@@ -5,6 +5,9 @@ import Foundation
  *
  * The differents types of query in order to know where to use the parameters.
  *
+ * Ref: https://stackoverflow.com/a/17999251/2448287
+ * https://idratherbewriting.com/learnapidoc/docapis_doc_parameters.html#request_body_parameters
+ *
  ******************************************************************************/
 
 enum QueryType {

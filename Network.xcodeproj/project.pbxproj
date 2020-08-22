@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2400847722CB3DC000C18CDC /* GetTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2400847622CB3DC000C18CDC /* GetTokenRequest.swift */; };
+		2445DF8924F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */; };
+		2445DF8A24F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */; };
 		24674B1722F2BFC4002EE5EA /* CombinedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */; };
 		24674B1822F2C128002EE5EA /* CombinedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */; };
 		248668AD22C495B400425512 /* QueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248668AC22C495B400425512 /* QueryType.swift */; };
@@ -109,6 +111,7 @@
 
 /* Begin PBXFileReference section */
 		2400847622CB3DC000C18CDC /* GetTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenRequest.swift; sourceTree = "<group>"; };
+		2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProviderProtocol.swift; sourceTree = "<group>"; };
 		24674B1622F2BFC4002EE5EA /* CombinedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedOperation.swift; sourceTree = "<group>"; };
 		248668AC22C495B400425512 /* QueryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryType.swift; sourceTree = "<group>"; };
 		248668AE22C4962C00425512 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -230,6 +233,7 @@
 		249B780122C41131007A0882 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				2445DF8824F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift */,
 				24A4149022C23A5D00CDEB4B /* NetworkServiceProvider.swift */,
 				4D853B4D22CCAC0300FE7CE8 /* UrlRequestBuilder.swift */,
 				248668B222C49E4400425512 /* ApiServiceProtocol.swift */,
@@ -569,6 +573,7 @@
 				248668B322C49E4400425512 /* ApiServiceProtocol.swift in Sources */,
 				248668AD22C495B400425512 /* QueryType.swift in Sources */,
 				4D853B4E22CCAC0300FE7CE8 /* UrlRequestBuilder.swift in Sources */,
+				2445DF8924F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */,
 				24BDC15322F239C7002DC8A1 /* PostPostOperation.swift in Sources */,
 				A90F49DA22D38FA500B124B6 /* MeloRequestModel.swift in Sources */,
 				A90F49D422D37E4A00B124B6 /* GetQrCodeRequest.swift in Sources */,
@@ -635,6 +640,7 @@
 				24BDC15F22F23D97002DC8A1 /* TokenType.swift in Sources */,
 				24BDC18422F245A2002DC8A1 /* ApiRequestTests.swift in Sources */,
 				24BDC17F22F23DE3002DC8A1 /* QrCode.swift in Sources */,
+				2445DF8A24F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */,
 				24BDC16922F23DA4002DC8A1 /* NetworkQueue.swift in Sources */,
 				24BDC17522F23DBF002DC8A1 /* PostPostRequest.swift in Sources */,
 				24A4148422C23A2900CDEB4B /* NetworkTests.swift in Sources */,

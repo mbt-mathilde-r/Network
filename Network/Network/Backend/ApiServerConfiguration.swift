@@ -1,6 +1,12 @@
 import Foundation
 
-// https://jsonplaceholder.typicode.com
+
+/*******************************************************************************
+ * ApiServerConfiguration
+ *
+ * Configure the api server by creating the base url.
+ *
+ ******************************************************************************/
 
 final class ApiServerConfiguration {
 
@@ -15,17 +21,19 @@ final class ApiServerConfiguration {
   /******************** URL ********************/
 
   private var host: String {
-    return "jsonplaceholder.typicode.com" //"api.devz.mybraintech.com"
+    return "jsonplaceholder.typicode.com"
   }
 
+  /// Return server version (Debug, release, ...).
   var version: String {
     #if DEBUG
-    return "/melomind_dev"
+    return ""
     #elseif RELEASE
-    return "/melomind_dev"
+    return ""
     #endif
   }
 
+  /// The base url for the server.
   var baseURL: URLComponents {
     var urlComponents = URLComponents()
     urlComponents.scheme = "https"
