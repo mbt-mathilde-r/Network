@@ -5,17 +5,24 @@ extension UrlSessionApiService: UrlSessionApiServiceTestable { }
 
 class UrlSessionApiServiceTests: XCTestCase {
 
-  func testService() {
+  func testServiceSuccess() {
+    let expectation = XCTestExpectation(description: #function)
+
     let mockServiceProvider = MockServiceProvider()
 
     XCTAssert(mockServiceProvider.isInitialized == false)
     let apiService = UrlSessionApiService(service: MockServiceProvider())
 
     apiService.setupForMock() { result in
-      XCTAssert(result == true)
+      if result {
+        expectation.fulfill()
+      } else {
+        XCTFail()
+      }
     }
 
-    //while true { }
+    let result = XCTWaiter.wait(for: [expectation], timeout: 3)
+    XCTAssert(result == .completed, "Expectation error")
   }
 
 }

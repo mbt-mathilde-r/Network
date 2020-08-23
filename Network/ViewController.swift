@@ -30,7 +30,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    setup()
+//    setup()
   }
 
   private func setup() {
@@ -80,7 +80,7 @@ extension ViewController: UITableViewDataSource {
       as? CustomTableViewCell else {
       return UITableViewCell()
     }
-    
+
     let post = posts[indexPath.row]
     cell.setup(with: post)
 

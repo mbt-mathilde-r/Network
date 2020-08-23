@@ -43,7 +43,7 @@ final class NetworkQueue {
 
   /// Adds the specified operation.
   /// - Parameter operation: The operation to be added to the queue.
-  func addOperation(operation: Operation) {
+  func addOperation(_ operation: Operation) {
     queue.addOperation(operation)
   }
 
@@ -53,7 +53,7 @@ final class NetworkQueue {
   ///   - waitUntilFinished: If true, the current thread is blocked until all
   ///   of the specified operations finish executing. If false, the operations
   ///   are added to the queue and control returns immediately to the caller.
-  func addOperations(operations: [Operation], waitUntilFinished: Bool = false) {
+  func addOperations(_ operations: [Operation], waitUntilFinished: Bool = false) {
     queue.addOperations(operations, waitUntilFinished: waitUntilFinished)
   }
 

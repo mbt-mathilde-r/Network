@@ -34,6 +34,6 @@ final class Batcher {
       completion?()
     }
 
-    NetworkQueue.shared.addOperation(operation: newOperation)
+    NetworkQueue.shared.addOperation(newOperation)
   }
 }

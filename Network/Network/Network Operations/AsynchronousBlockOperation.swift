@@ -36,6 +36,10 @@ class AsynchronousBlockOperation: BlockOperation {
     return true
   }
 
+  override var isReady: Bool {
+    return state == .ready //&& super.isReady
+  }
+
   override var isExecuting: Bool {
     return state == .executing
   }
@@ -60,13 +64,19 @@ class AsynchronousBlockOperation: BlockOperation {
     // method and use it to initiate your operation. Your custom implementation
     // must not call super at any time.
     
-    guard isCancelled == false else { return }
+    guard isCancelled == false else {
+      state = .finished
+      return
+    }
+
     state = .executing
     main()
   }
 
   func finish() {
-    state = .finished
+    if isExecuting {
+      state = .finished
+    }
   }
 
 }

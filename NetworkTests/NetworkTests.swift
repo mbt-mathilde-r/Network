@@ -17,22 +17,17 @@ class NetworkTests: XCTestCase {
 
   /******************** Test expectation ********************/
 
-  let timeout: TimeInterval = 10
+  let timeout: TimeInterval = 4
 
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization
   //----------------------------------------------------------------------------
 
-  var queue = OperationQueue()
-
   override func setUp() {
-    queue = OperationQueue()
-    queue.maxConcurrentOperationCount = 1
   }
 
   override func tearDown() {
-    NetworkQueue.shared.cancelAllOperations()
   }
 
 
@@ -70,7 +65,7 @@ class NetworkTests: XCTestCase {
     let getExpectation =
       XCTestExpectation(description: "getPostOperation expectation")
 
-    let getPostOperation = GetPostOperation(postId: 13)
+    let getPostOperation = GetPostOperation(postId: 1)
 
     getPostOperation.completionBlock = {
       switch getPostOperation.result {
@@ -79,14 +74,7 @@ class NetworkTests: XCTestCase {
       }
     }
 
-//    getPostOperation.didSucceed = { model in
-//      print("Get Succed: \(model.userId)")
-//      getExpectation.fulfill()
-//    }
-
-//    getPostOperation.didFail = { error in XCTFail(error.localizedDescription) }
-
-    queue.addOperation(getPostOperation)
+    NetworkQueue.shared.addOperation(getPostOperation)
     let expectationsResult = wait(for: getExpectation)
     XCTAssert(expectationsResult == .completed, "Error with expectations")
   }
@@ -97,7 +85,7 @@ class NetworkTests: XCTestCase {
     let getExpectation =
       XCTestExpectation(description: "getPostOperation expectation")
 
-    let getPostOperation = GetPostOperation(postId: 13)
+    let getPostOperation = GetPostOperation(postId: 2)
     getPostOperation.completionBlock = {
       switch getPostOperation.result {
         case .success(_): getExpectation.fulfill()
@@ -105,22 +93,15 @@ class NetworkTests: XCTestCase {
       }
     }
 
-//    getPostOperation.didSucceed = { model in
-//      print("Get Succed: \(model.userId)")
-//      getExpectation.fulfill()
-//    }
-
-//    getPostOperation.didFail = { error in XCTFail(error.localizedDescription) }
     expectations.append(getExpectation)
 
 
 
     let postExpectation =
       XCTestExpectation(description: "postPostOperation expectation")
-    let postPostOperation = PostPostOperation(userId: 42,
-                                              title: "title",
-                                              body: "body")
 
+    let postPostOperation =
+      PostPostOperation(userId: 2, title: "title", body: "body")
     postPostOperation.completionBlock = {
       switch postPostOperation.result {
         case .success(_): postExpectation.fulfill()
@@ -128,15 +109,10 @@ class NetworkTests: XCTestCase {
       }
     }
 
-//    postPostOperation.didSucceed = { model in
-//      print("Post Succed: \(model.userId)")
-//      postExpectation.fulfill()
-//    }
-
-//    postPostOperation.didFail = { error in XCTFail(error.localizedDescription) }
     expectations.append(postExpectation)
 
-    queue.addOperations([getPostOperation, postPostOperation], waitUntilFinished: true)
+    NetworkQueue.shared.addOperation(getPostOperation)
+    NetworkQueue.shared.addOperation(postPostOperation)
 
     let expectationsResult = wait(for: expectations)
     XCTAssert(expectationsResult == .completed, "Error with expectations")
@@ -148,19 +124,13 @@ class NetworkTests: XCTestCase {
     let getExpectation =
       XCTestExpectation(description: "getPostDepOperation expectation")
 
-    let getPostOperation = GetPostOperation(postId: 13)
+    let getPostOperation = GetPostOperation(postId: 3)
     getPostOperation.completionBlock = {
       switch getPostOperation.result {
         case .success(_): getExpectation.fulfill()
         case .failure(_): return
       }
     }
-//    getPostOperation.didSucceed = { model in
-//      print("Get Succed: \(model.userId)")
-//      getExpectation.fulfill()
-//    }
-////    getPostOperation.didFail =
-////      { error in XCTFail(error.localizedDescription) }
 
     expectations.append(getExpectation)
 
@@ -168,7 +138,7 @@ class NetworkTests: XCTestCase {
       XCTestExpectation(description: "postPostOperation expectation")
 
     let postPostDepOperation =
-      PostPostOperation(userId: 13,
+      PostPostOperation(userId: 3,
                         title: "title",
                         body: "body",
                         dependencies: [getPostOperation])
@@ -179,19 +149,10 @@ class NetworkTests: XCTestCase {
       }
     }
 
-//    postPostDepOperation.didSucceed = { model in
-//      print("Post 2 Succed: \(model.userId)")
-//      postDepExpectation.fulfill()
-//    }
-
-//    postPostDepOperation.didFail =
-//      { error in XCTFail(error.localizedDescription) }
-
     expectations.append(postDepExpectation)
 
-
-    queue.addOperation(postPostDepOperation)
-    queue.addOperation(getPostOperation)
+    NetworkQueue.shared.addOperation(getPostOperation)
+    NetworkQueue.shared.addOperation(postPostDepOperation)
 
     let expectationsResult = wait(for: expectations)
     XCTAssert(expectationsResult == .completed, "Error with expectations")
@@ -202,35 +163,33 @@ class NetworkTests: XCTestCase {
 
     let getExpectation =
       XCTestExpectation(description: "getPostOperation expectation")
-    let getPostOperation = GetPostOperation(postId: 13)
+    let getPostOperation = GetPostOperation(postId: 4)
     getPostOperation.completionBlock = {
       switch getPostOperation.result {
         case .success(_): return
         case .failure(_): getExpectation.fulfill()
       }
     }
-////    getPostOperation.didSucceed = { _ in XCTFail("Should not complete.") }
-//    getPostOperation.didFail = { error in getExpectation.fulfill() }
+
     expectations.append(getExpectation)
 
 
     let postExpectation =
       XCTestExpectation(description: "postPostOperation expectation")
     let postPostOperation =
-      PostPostOperation(userId: 42, title: "title", body: "body")
+      PostPostOperation(userId: 4, title: "title", body: "body")
     postPostOperation.completionBlock = {
       switch postPostOperation.result {
         case .success(_): return
         case .failure(_): postExpectation.fulfill()
       }
     }
-//    postPostOperation.didSucceed = {  _ in XCTFail("Should not complete.") }
-//    postPostOperation.didFail = { error in postExpectation.fulfill() }
+
     expectations.append(postExpectation)
 
-    queue.addOperation(getPostOperation)
-    queue.addOperation(postPostOperation)
-    queue.cancelAllOperations()
+    NetworkQueue.shared.addOperation(getPostOperation)
+    NetworkQueue.shared.addOperation(postPostOperation)
+    NetworkQueue.shared.cancelAllOperations()
 
     let expectationsResult = wait(for: expectations)
     XCTAssert(expectationsResult == .completed, "Error with expectations")
@@ -245,9 +204,9 @@ class NetworkTests: XCTestCase {
       XCTestExpectation(description: "CombinedOperation expectation")
 
     let combinedOperation = CombinedOperation()
-    combinedOperation.didSucceed = { result in expectation.fulfill() }
+    combinedOperation.completionBlock = { expectation.fulfill() }
 
-    queue.addOperation(combinedOperation)
+    NetworkQueue.shared.addOperation(combinedOperation)
 
     let expectationsResult = wait(for: expectation)
     XCTAssert(expectationsResult == .completed, "Error with expectations")

@@ -19,6 +19,7 @@ class ApiTokenProviderTests: XCTestCase {
   func testSetToken() {
     let tokenToType: [String: TokenType] = [
       "" : .none,
+      "custom": .custom(token: "custom"),
       "user": .user,
       "admin": .admin
     ]

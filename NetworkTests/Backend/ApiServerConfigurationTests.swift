@@ -4,7 +4,7 @@ import XCTest
 class ApiServerConfigurationTests: XCTestCase {
 
   func testBaseUrl() {
-    let expectedUrl = "https://api.devz.mybraintech.com"
+    let expectedUrl = "https://jsonplaceholder.typicode.com"
     guard let url = ApiServerConfiguration.shared.baseURL.url else {
       XCTFail("Couldn't get the base url")
       return
@@ -14,7 +14,7 @@ class ApiServerConfigurationTests: XCTestCase {
   }
 
   func testVersion() {
-    let expectedVersion = "/melomind_dev"
+    let expectedVersion = ""
     let version = ApiServerConfiguration.shared.version
     XCTAssertTrue(expectedVersion == version)
   }

@@ -38,8 +38,8 @@ final class CombinedOperation: AsynchronousBlockOperation {
   //----------------------------------------------------------------------------
 
   override init() {
-    getOperation = GetPostOperation(postId: 13)
-    postOperation = PostPostOperation(userId: 42,
+    getOperation = GetPostOperation(postId: 5)
+    postOperation = PostPostOperation(userId: 5,
                                       title: "Title",
                                       body: "body",
                                       dependencies: [getOperation])
@@ -53,42 +53,82 @@ final class CombinedOperation: AsynchronousBlockOperation {
   }
 
   private func setupGetOperation() {
-    getOperation.didSucceed =
-      { [weak self] model in self?.userId = model.userId }
+//    getOperation.didSucceed =
+//      { [weak self] model in self?.userId = model.userId }
+//
+//    getOperation.didFail = { [weak self] error in
+//      self?.finish()
+//      self?.didFail?(error)
+//    }
 
-    getOperation.didFail = { [weak self] error in
-      self?.finish()
-      self?.didFail?(error)
+
+    getOperation.completionBlock = { [weak self] in
+      guard let result = self?.getOperation.result else { return }
+      switch result {
+        case .success(let post): self?.userId = post.userId
+        case .failure(let error):
+          self?.didFail?(error)
+          self?.finish()
+      }
     }
+
   }
 
   private func setupPostOperation() {
-    postOperation.didSucceed = { [weak self] model in
-      self?.finish()
+    postOperation.completionBlock = { [weak self] in
+      defer { self?.finish() }
+      guard let result = self?.postOperation.result else { return }
+      switch result {
+        case .success(_):
+          guard let userId = self?.userId else {
+            let error = NSError(domain: "Combined", code: 1)
+            self?.didFail?(error)
+            return
+          }
+          self?.didSucceed?(userId)
 
-      guard let userId = self?.userId else {
-        let error = NSError(domain: "Combined", code: 1)
-        self?.didFail?(error)
-        return
+        case .failure(let error):
+          self?.didFail?(error)
       }
-
-      self?.didSucceed?(userId)
     }
 
-    postOperation.didFail = { [weak self] error in
-      self?.finish()
-      self?.didFail?(error)
-    }
+
+//    postOperation.didSucceed = { [weak self] model in
+//      guard let userId = self?.userId else {
+//        let error = NSError(domain: "Combined", code: 1)
+//        self?.didFail?(error)
+//        return
+//      }
+//      self?.didSucceed?(userId)
+//      self?.finish()
+//    }
+//
+//    postOperation.didFail = { [weak self] error in
+//      self?.finish()
+//      self?.didFail?(error)
+//    }
   }
 
-  override func start() {
-    super.start()
+  //----------------------------------------------------------------------------
+  // MARK: - Operation lifecycle
+  //----------------------------------------------------------------------------
 
-    NetworkQueue.shared.addOperation(operation: getOperation)
-    NetworkQueue.shared.addOperation(operation: postOperation)
-
+  override func main() {
     getOperation.start()
     postOperation.start()
   }
+
+  override func cancel() {
+    getOperation.cancel()
+    postOperation.cancel()
+    super.cancel()
+  }
+
+  override func finish() {
+    getOperation.cancel()
+    postOperation.cancel()
+    super.finish()
+  }
+
 
 }

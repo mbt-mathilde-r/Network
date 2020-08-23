@@ -80,7 +80,7 @@ class NetworkOperation<
     setupRequest()
 
     if shouldAddToNetworkQueue {
-      NetworkQueue.shared.addOperation(operation: self)
+      NetworkQueue.shared.addOperation(self)
     }
   }
 

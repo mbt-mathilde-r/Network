@@ -62,7 +62,6 @@
 		24BDC17D22F23DE3002DC8A1 /* GetQrCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D322D37E4A00B124B6 /* GetQrCodeRequest.swift */; };
 		24BDC17E22F23DE3002DC8A1 /* GetQrCodeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D722D3835500B124B6 /* GetQrCodeOperation.swift */; };
 		24BDC17F22F23DE3002DC8A1 /* QrCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F49D522D381C900B124B6 /* QrCode.swift */; };
-		24BDC18422F245A2002DC8A1 /* ApiRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDC18322F245A2002DC8A1 /* ApiRequestTests.swift */; };
 		24C239D022CA2470002FF6CA /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239CF22CA2470002FF6CA /* PostModel.swift */; };
 		24C239D222CA24C4002FF6CA /* GetPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239D122CA24C4002FF6CA /* GetPostRequest.swift */; };
 		24C239D422CA2FCA002FF6CA /* GetPostOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C239D322CA2FCA002FF6CA /* GetPostOperation.swift */; };
@@ -137,7 +136,6 @@
 		24A4148522C23A2900CDEB4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24A4149022C23A5D00CDEB4B /* NetworkServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProvider.swift; sourceTree = "<group>"; };
 		24BDC15522F23A95002DC8A1 /* Batcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Batcher.swift; sourceTree = "<group>"; };
-		24BDC18322F245A2002DC8A1 /* ApiRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestTests.swift; sourceTree = "<group>"; };
 		24C239CF22CA2470002FF6CA /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		24C239D122CA24C4002FF6CA /* GetPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostRequest.swift; sourceTree = "<group>"; };
 		24C239D322CA2FCA002FF6CA /* GetPostOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostOperation.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 		24BDC18022F2454F002DC8A1 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				24BDC18322F245A2002DC8A1 /* ApiRequestTests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -371,9 +368,9 @@
 		4D4EBBEC22D4CD9800199055 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
-				4DD58FD822F2E15800A54DC0 /* MockServiceProvider.swift */,
 				4D4EBBED22D4CDC600199055 /* ApiServerConfigurationTests.swift */,
 				4DB44D0622D5EBD500C6ED78 /* ApiTokenProviderTests.swift */,
+				4DD58FD822F2E15800A54DC0 /* MockServiceProvider.swift */,
 				2445DF8B24F16765008DB4A5 /* UrlSessionApiServiceTestable.swift */,
 				4DD58FDB22F2E44900A54DC0 /* UrlSessionApiServiceTests.swift */,
 			);
@@ -650,7 +647,6 @@
 				24BDC17D22F23DE3002DC8A1 /* GetQrCodeRequest.swift in Sources */,
 				24BDC17C22F23DE3002DC8A1 /* GetConfigOperation.swift in Sources */,
 				24BDC15F22F23D97002DC8A1 /* TokenType.swift in Sources */,
-				24BDC18422F245A2002DC8A1 /* ApiRequestTests.swift in Sources */,
 				24BDC17F22F23DE3002DC8A1 /* QrCode.swift in Sources */,
 				2445DF8A24F165DF008DB4A5 /* NetworkServiceProviderProtocol.swift in Sources */,
 				24BDC16922F23DA4002DC8A1 /* NetworkQueue.swift in Sources */,
