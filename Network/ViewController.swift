@@ -10,22 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
-  @IBOutlet weak var tableView: UITableView!
+  //----------------------------------------------------------------------------
+  // MARK: - Properties
+  //----------------------------------------------------------------------------
 
-  var sessions = [Int: [SessionHistory]]() {
+  @IBOutlet weak private var tableView: UITableView!
+
+  private var posts = [PostModel]() {
     didSet {
       self.tableView.reloadData()
     }
   }
 
-  var config: Config?
-
-  let dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .medium
-    dateFormatter.timeStyle = .none
-    return dateFormatter
-  }()
+  private var getPostsOperation: GetPostsOperation?
 
   //----------------------------------------------------------------------------
   // MARK: - View life cycle
@@ -33,136 +30,61 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    return
-    
-    let op = GetSessionsOperation()
-    op.completionBlock = {
-      if Thread.isMainThread {
-        print("Main Thread")
-      } else {
-        print("Background Thread")
-      }
-    }
-//     let op = BlockOperation {
-//      if Thread.isMainThread {
-//        print("Main Thread")
-//      } else {
-//        print("Background Thread")
-//      }
-//    }
-
-//    NetworkQueue.shared.addOperation(operation: op)
-
-    OperationQueue.main.addOperation(op)
-
-    return
-
-    tableView.register(UINib(nibName: "SessionTableViewCell", bundle: nil),
-                       forCellReuseIdentifier: "session")
-
-    getConfig() { result in
-      switch result {
-      case .success(let config):
-        self.config = config
-        self.getSessionsHistoryFromConfig()
-      case .failure(let error):
-        print("Cannot get config \(error)")
-      }
-    }
+    setup()
   }
 
+  private func setup() {
+    setupTableView()
+    setupGetPostsOperation()
+  }
 
-  //----------------------------------------------------------------------------
-  // MARK: - Api calls
-  //----------------------------------------------------------------------------
+  private func setupTableView() {
+    let nib = UINib(nibName: CustomTableViewCell.identifier, bundle: .main)
+    tableView.register(nib,
+                       forCellReuseIdentifier: CustomTableViewCell.identifier)
+  }
 
-  typealias SessionHistoryResult = Result<[SessionHistory], Error>
-
-  private func getSessionsHistoryFromConfig() {
-    guard let config = config else { return }
-
-    self.getSessionsHistory(for: config.phases)  { result in
-      switch result {
-      case .success(let sessions):
-        if let first = sessions.first { self.sessions[first.phase] = sessions }
-      case .failure(let error): print("error : \(error)")
+  private func setupGetPostsOperation() {
+    getPostsOperation = GetPostsOperation()
+    getPostsOperation?.didSucceed = { [weak self] result in
+      DispatchQueue.main.async {
+        self?.posts = result
       }
     }
 
+    guard let getPostsOperation = getPostsOperation else { return }
+    NetworkQueue.shared.addOperation(getPostsOperation)
   }
 
-  func getSessionsHistory(for phases: [ConfigPhase],
-                          dependencies: [Operation]? = nil,
-                          completion: ((SessionHistoryResult) -> Void)?) {
-    let operations = phases.map { phase -> Operation in
-      let parameters = SessionHistoryParameters(phase: phase.index)
-      let operation = GetSessionsHistoryOperation(parameters: parameters)
-//      operation.completionBlock = { completion?(operation.result) }
-      operation.completionBlockInMainThread = { result in
-        completion?(result)
-      }
-      return operation
-    }
-    NetworkQueue.shared.addOperations(operations: operations)
-  }
-
-  /// Get app config
-  ///
-  /// - Parameters:
-  ///   - success: success closure with the config
-  ///   - failure: failure closure with error message
-  func getConfig(completion: ((Result<Config, Error>) -> Void)?) {
-    let operation = GetConfigOperation()
-//    operation.completionBlock = { completion?(operation.result) }
-    operation.completionBlockInMainThread = { result in
-      completion?(result)
-    }
-    NetworkQueue.shared.addOperation(operation: operation)
-  }
-
-  /// Get list of authentified user sessions
-  ///
-  /// - Parameters:
-  ///   - success: success closure with the config
-  ///   - failure: failure closure with error message
-  func getSessions(completion: ((Result<[Session], Error>) -> Void)?) {
-    let operation = GetSessionsOperation()
-//    operation.completionBlock = { completion?(operation.result) }
-    operation.completionBlockInMainThread = { result in
-      completion?(result)
-    }
-    NetworkQueue.shared.addOperation(operation: operation)
-  }
 }
 
-//----------------------------------------------------------------------------
-// MARK: - Table View control
-//----------------------------------------------------------------------------
+//==============================================================================
+// MARK: - Tableview Data source
+//==============================================================================
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDataSource {
 
   func numberOfSections(in tableView: UITableView) -> Int {
-    return sessions.count
+    return 1
   }
 
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Phase \(section + 1)"
-  }
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return sessions[section]?.count ?? 0
+  func tableView(_ tableView: UITableView,
+                 numberOfRowsInSection section: Int) -> Int {
+    return posts.count
   }
 
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "session")
-    let session = sessions[indexPath.section]?[indexPath.row]
-
-    if let cell = cell as? SessionTableViewCell, let session = session {
-      cell.date = dateFormatter.string(from: Date(timeIntervalSince1970: session.startedAt))
-      cell.index = session.sessionId
-      cell.duration = session.duration / 60
+  func tableView(_ tableView: UITableView,
+                 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let identifier = CustomTableViewCell.identifier
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier)
+      as? CustomTableViewCell else {
+      return UITableViewCell()
     }
+    
+    let post = posts[indexPath.row]
+    cell.setup(with: post)
 
-    return cell!
+    return cell
   }
 
 }

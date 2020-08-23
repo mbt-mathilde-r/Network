@@ -76,6 +76,10 @@
 		24F30E9424F28E8600B1FD70 /* GetPostsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F30E9224F28E8600B1FD70 /* GetPostsRequest.swift */; };
 		24F30E9624F28E9500B1FD70 /* GetPostsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F30E9524F28E9500B1FD70 /* GetPostsOperation.swift */; };
 		24F30E9724F28E9500B1FD70 /* GetPostsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F30E9524F28E9500B1FD70 /* GetPostsOperation.swift */; };
+		24F30E9A24F2915600B1FD70 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F30E9824F2915600B1FD70 /* CustomTableViewCell.swift */; };
+		24F30E9B24F2915600B1FD70 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F30E9824F2915600B1FD70 /* CustomTableViewCell.swift */; };
+		24F30E9C24F2915600B1FD70 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F30E9924F2915600B1FD70 /* CustomTableViewCell.xib */; };
+		24F30E9D24F2915600B1FD70 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F30E9924F2915600B1FD70 /* CustomTableViewCell.xib */; };
 		4D4EBBE822D49B9600199055 /* GetSessionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE422D49B9600199055 /* GetSessionsOperation.swift */; };
 		4D4EBBE922D49B9600199055 /* SessionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE522D49B9600199055 /* SessionHistory.swift */; };
 		4D4EBBEA22D49B9600199055 /* GetSessionsHistoryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4EBBE622D49B9600199055 /* GetSessionsHistoryOperation.swift */; };
@@ -146,6 +150,8 @@
 		24D8B2B922C3DFC800AC462B /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		24F30E9224F28E8600B1FD70 /* GetPostsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostsRequest.swift; sourceTree = "<group>"; };
 		24F30E9524F28E9500B1FD70 /* GetPostsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostsOperation.swift; sourceTree = "<group>"; };
+		24F30E9824F2915600B1FD70 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		24F30E9924F2915600B1FD70 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		4D4EBBE422D49B9600199055 /* GetSessionsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSessionsOperation.swift; sourceTree = "<group>"; };
 		4D4EBBE522D49B9600199055 /* SessionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHistory.swift; sourceTree = "<group>"; };
 		4D4EBBE622D49B9600199055 /* GetSessionsHistoryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSessionsHistoryOperation.swift; sourceTree = "<group>"; };
@@ -298,6 +304,8 @@
 				4D51410622F1C732001676F8 /* Demo */,
 				24A4147A22C23A2900CDEB4B /* Info.plist */,
 				24A4147022C23A2800CDEB4B /* ViewController.swift */,
+				24F30E9824F2915600B1FD70 /* CustomTableViewCell.swift */,
+				24F30E9924F2915600B1FD70 /* CustomTableViewCell.xib */,
 				4D853B5622CCD06100FE7CE8 /* Main.storyboard */,
 				24A4148F22C23A4A00CDEB4B /* Network */,
 			);
@@ -536,6 +544,7 @@
 				A921C84A22D4A04400455A84 /* SessionTableViewCell.xib in Resources */,
 				4D853B5722CCD06200FE7CE8 /* Main.storyboard in Resources */,
 				24A4147622C23A2900CDEB4B /* Assets.xcassets in Resources */,
+				24F30E9C24F2915600B1FD70 /* CustomTableViewCell.xib in Resources */,
 				4D853B5522CCD05900FE7CE8 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +553,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24F30E9D24F2915600B1FD70 /* CustomTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +603,7 @@
 				4D54E56C22D324B2007B7C18 /* AsynchronousBlockOperation.swift in Sources */,
 				24A4146F22C23A2800CDEB4B /* AppDelegate.swift in Sources */,
 				24C239D422CA2FCA002FF6CA /* GetPostOperation.swift in Sources */,
+				24F30E9A24F2915600B1FD70 /* CustomTableViewCell.swift in Sources */,
 				A90F49D822D3835500B124B6 /* GetQrCodeOperation.swift in Sources */,
 				24F30E9324F28E8600B1FD70 /* GetPostsRequest.swift in Sources */,
 				24D8B2B322C3AA6700AC462B /* NetworkError.swift in Sources */,
@@ -631,6 +642,7 @@
 				4D4EBBEE22D4CDC600199055 /* ApiServerConfigurationTests.swift in Sources */,
 				24BDC16322F23D9F002DC8A1 /* HeaderField.swift in Sources */,
 				24BDC15B22F23D8B002DC8A1 /* UrlRequestBuilder.swift in Sources */,
+				24F30E9B24F2915600B1FD70 /* CustomTableViewCell.swift in Sources */,
 				24F30E9724F28E9500B1FD70 /* GetPostsOperation.swift in Sources */,
 				24BDC17722F23DE3002DC8A1 /* GetSessionsHistoryOperation.swift in Sources */,
 				24BDC15A22F23D8B002DC8A1 /* NetworkServiceProvider.swift in Sources */,
