@@ -53,15 +53,6 @@ final class CombinedOperation: AsynchronousBlockOperation {
   }
 
   private func setupGetOperation() {
-//    getOperation.didSucceed =
-//      { [weak self] model in self?.userId = model.userId }
-//
-//    getOperation.didFail = { [weak self] error in
-//      self?.finish()
-//      self?.didFail?(error)
-//    }
-
-
     getOperation.completionBlock = { [weak self] in
       guard let result = self?.getOperation.result else { return }
       switch result {
@@ -91,22 +82,6 @@ final class CombinedOperation: AsynchronousBlockOperation {
           self?.didFail?(error)
       }
     }
-
-
-//    postOperation.didSucceed = { [weak self] model in
-//      guard let userId = self?.userId else {
-//        let error = NSError(domain: "Combined", code: 1)
-//        self?.didFail?(error)
-//        return
-//      }
-//      self?.didSucceed?(userId)
-//      self?.finish()
-//    }
-//
-//    postOperation.didFail = { [weak self] error in
-//      self?.finish()
-//      self?.didFail?(error)
-//    }
   }
 
   //----------------------------------------------------------------------------
