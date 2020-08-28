@@ -1,7 +1,6 @@
 import Foundation
 
-final class GetPostOperation:
-NetworkOperation<PostModel, PostModel, GetPostRequest> {
+final class GetPostOperation: NetworkOperation<PostModel, GetPostRequest> {
 
   //----------------------------------------------------------------------------
   // MARK: - Initialization
@@ -13,3 +12,7 @@ NetworkOperation<PostModel, PostModel, GetPostRequest> {
   }
   
 }
+
+
+
+
